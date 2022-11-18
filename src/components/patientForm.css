@@ -1,0 +1,71 @@
+.patientFormHomeStyle {
+    background: linear-gradient(180deg, rgba(48, 230, 215, 0.3) 8.58%, rgba(240, 247, 246, 0.07) 100%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+    overflow: auto;
+    scrollbar-width: none;  /* Firefox */    
+    -ms-overflow-style: none;  /* IE and Edge */
+    padding-bottom: 50px;
+}
+
+.patientFormHomeStyle::-webkit-scrollbar {
+    display:none; /* CHROME */
+} 
+
+.dynamicForm {
+    /* padding-top: 20px; */
+    padding-bottom: 20px;
+}
+
+.logoutButton {
+    width: 163px;
+    height: 45px;
+    background: #05056B;
+    border-radius: 32px;
+    color: #FDFDFF;
+    /* font-family: Montserrat; */
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 40px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+  .formFields {
+    margin-top: 10px;
+    width: 325px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: inset 1px 2px 6px #D0D0D0;    
+  }
+
+  .optionalSet{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .submitButton {
+    width: 150px;
+    height: 45px;
+    background: #05056B;
+    border-radius: 32px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 40px;
+    color: #FDFDFF;    
+  }

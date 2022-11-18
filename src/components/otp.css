@@ -1,0 +1,68 @@
+.enrollOtpHomeStyle {
+    background: #E7F9FD;
+    border-radius: 16px;
+    height: 100vh;
+}
+
+.enrollOtpTop {
+    background: #B0F3F2;
+    border-radius: 0px 0px 0px 56px;
+    height: 50vh;
+
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+}
+
+.otpSet {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: 90px;
+}
+
+.enrollOtpBottom {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+    height: 50vh;
+    padding-left: 55px;
+    padding-right: 55px;
+}
+
+.otp-field {
+    width: 46px;
+    height: 52px;
+    background: #FCFFFF;
+    margin-right: 10px;
+    border: none;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 40px;
+    color: #05056B;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.verifyButton {
+    width: 265px;
+    height: 45px;
+    background: #05056B;
+    border-radius: 32px;
+    margin-top: 15px;
+    color:#FEFEFF;
+    font-weight: 600;
+    font-size: 20px;    
+}
+
+.verifyButton:disabled {
+    background-color: gray;
+}

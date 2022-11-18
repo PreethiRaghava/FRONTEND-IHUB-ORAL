@@ -1,0 +1,40 @@
+.patientSameMobileHomeStyle {
+    background: linear-gradient(180deg, rgba(48, 230, 215, 0.3) 8.58%, rgba(240, 247, 246, 0.07) 100%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+    overflow-x: hidden;    
+    padding-bottom: 50px;
+}
+
+.sameMobileText {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;    
+    color: #05056B;
+}
+
+.accountCard {
+    background: #FFFFFF;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    width: 300px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 30px
+}
+
+.accountForm .row {
+    text-align: left;
+}
+
+.accountButton {
+    background-color: #05056B;
+    color: #FCFDFF;
+    width: 100px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+}

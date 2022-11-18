@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+.drive-info {
+    padding-left: clamp(10px,30px,5%);
+    padding-top: clamp(5px,10px,3%);
+    display:inline-block; 
+    /* justify-content: left; */
+}
+#drive-info-bar{
+    width: 100vw;
+    background-color:#B0F3F2;
+    color:#05056B;
+    margin-bottom: clamp(8px,15px,3%);
+}
+.op-wh {
+    background-color:white;
+}

@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+.drive {
+  padding-left: clamp(10px,30px,5%);
+  padding-top: clamp(5px,10px,3%);
+  display:block; 
+  justify-content: left;
+}
+.drive-title{
+  letter-spacing: 2px;
+  font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+  color:#101d66;
+  font-weight: bolder;
+  padding-left:2%;
+  padding-right:10%;
+  margin-bottom: 2%;
+}
+.drive-subtitle{
+    letter-spacing: 1.5px;
+    font-size: clamp(1.2rem, 1.5vw, 2rem);
+    color:#060b26;
+    font-weight: bold;
+    padding-left:3%;
+    padding-right:10%;
+    margin-bottom: 0.2%;
+}
+.drive-description{
+    font-size: clamp(0.8rem, 1vw, 1.2rem);
+    color:#000000;
+    padding-left:3%;
+    padding-right:10%;
+}
+.drive-table{
+    padding-top:3%;
+    padding-bottom:3%;
+    padding-left:3%;
+    padding-right:10%;
+    height: 460px;
+}
+.drive-create-section{
+  display: flex;
+}
+.drive-create-section .drive-subdes{
+  flex-grow: 10;
+}
+.drive-create-section .drive-create{
+  flex-grow: 0;
+}
+.drive-form-inline{
+  padding-left: 3%;
+  padding-right: 10%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  row-gap: 1%;
+}
+#outlined-basic{
+  width:80%;
+}
+.drive-flex-2{
+  padding-left: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  display: flex;
+  justify-content: flex-end;
+  gap:5%;
+  padding-right: 15%;
+}

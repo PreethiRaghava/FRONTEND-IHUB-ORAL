@@ -1,0 +1,2068 @@
+{
+    "patients_vitals": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name":"blood_preesure",
+                "field": "text"
+            },
+            {
+                "name":"systolic",
+                "field": "text"
+            },
+            {
+                "name":"diastolic",
+                "field": "text"
+            },
+            {
+                "name":"temperature",
+                "field": "text"
+            },
+            {
+                "name":"respiratory_rate",
+                "field": "text"
+            },
+            {
+                "name":"bmi",
+                "field": "text"
+            },
+            {
+                "name":"heart_rate",
+                "field": "text"
+            },
+            {
+                "name":"spo2",
+                "field": "text"
+            },
+            {
+                "name":"crp",
+                "field": "text"
+            }
+        ]
+    },
+    "patients_info": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "key",
+                "field": "text"
+            },
+            {
+                "name": "output",
+                "field": "text"
+            }
+        ]
+    },
+    "disease_profile": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "name",
+                "field": "text"
+            },
+            {
+                "name": "region_of_body",
+                "field": "text"
+            },
+            {
+                "name": "diagnostic_parameters",
+                "field": "text"
+            },
+            {
+                "name": "symptoms",
+                "field": "text"
+            },
+            {
+                "name": "severity",
+                "field": "text"
+            },
+            {
+                "name": "admitted_location",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "initial_Turmor_Observation": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "Type_for_tumor",
+                "field": "text"
+            },
+            {
+                "name": "region_of_tumor",
+                "field": "text"
+            },
+            {
+                "name": "neck",
+                "field": "text"
+            },
+            {
+                "name": "breast_left_and_right",
+                "field": "text"
+            },
+            {
+                "name": "pallor",
+                "field": "text"
+            },
+            {
+                "name": "lymphadenopathy",
+                "field": "text"
+            },
+            {
+                "name": "Icterus",
+                "field": "text"
+            },
+            {
+                "name": "Edema",
+                "field": "text"
+            }
+        ]
+    },
+    "Initial_clinical_Observation": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "Notes",
+                "field": "text"
+            },
+            {
+                "name": "diagnosis",
+                "field": "text"
+            },
+            {
+                "name": "Rx",
+                "field": "text"
+            },
+            {
+                "name": "referral",
+                "field": "text"
+            },
+            {
+                "name": "recommended_tests",
+                "field": "text"
+            }
+        ]
+    },
+    "xray": {
+        "requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "papsmear": {
+        "requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "mammography": {
+        "requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "oral_cavity": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "left",
+                "field": "file"
+            },
+			{
+                "name": "comment_left",
+                "field": "text"
+            },
+            {
+                "name": "right",
+                "field": "file"
+            },
+			{
+                "name": "comment_right",
+                "field": "text"
+            },
+            {
+                "name": "top",
+                "field": "file"
+            },
+			{
+                "name": "comment_top",
+                "field": "text"
+            },
+            {
+                "name": "bottom",
+                "field": "file"
+            },
+			{
+                "name": "comment_bottom",
+                "field": "text"
+            },
+            {
+                "name": "others",
+                "field": "file"
+            },
+			{
+                "name": "comment_others",
+                "field": "text"
+            },
+            {
+                "name": "others2",
+                "field": "file"
+            },
+			{
+                "name": "comment_others2",
+                "field": "text"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },            
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "ct_scans": {
+        "requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "mris": {
+        "requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "ultrasound": {
+        "requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "pet": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "nuclear_medicine": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "fluroscopy": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "imaging_key": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "body_site",
+                "field": "file"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "conclusion": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "pain_clinic",
+                "field": "text"
+            },
+            {
+                "name": "spo2_lesser_than_ninety",
+                "field": "text"
+            },
+            {
+                "name": "BMI",
+                "field": "text"
+            },
+            {
+                "name": "Diabetes",
+                "field": "text"
+            },
+            {
+                "name": "Hypertension",
+                "field": "text"
+            },
+            {
+                "name": "Malignancy",
+                "field": "text"
+            },
+            {
+                "name": "Benign_tumors",
+                "field": "text"
+            },
+            {
+                "name": "Any_other_diagnosis",
+                "field": "text"
+            }
+        ]
+    },
+    "hematology": {
+        "requirement": "optional",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "specimen_type",
+                "field": "text"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            },
+            {
+                "name": "absolute_basophil_count",
+                "field": "text"
+            },
+            {
+                "name": "absolute_eosinophil_count",
+                "field": "text"
+            },
+            {
+                "name": "absolute_lymphocyte_count",
+                "field": "text"
+            },
+            {
+                "name": "absolute_monocyte_count",
+                "field": "text"
+            },
+            {
+                "name": "absolute_neutrophil_count",
+                "field": "text"
+            },
+            {
+                "name": "activated_partial_thromboplastin_time",
+                "field": "text"
+            },
+            {
+                "name": "anti_thrombin_iii_antigen",
+                "field": "text"
+            },
+            {
+                "name": "blood_group_&_rh_factor",
+                "field": "text"
+            },
+            {
+                "name": "blood_peripheral_smear_examination",
+                "field": "text"
+            },
+            {
+                "name": "cd3_absolute_count",
+                "field": "text"
+            },
+            {
+                "name": "cd3/cd4/cd8_count",
+                "field": "text"
+            },
+            {
+                "name": "cd4_absolute_count",
+                "field": "text"
+            },
+            {
+                "name": "cd4/cd8_count",
+                "field": "text"
+            },
+            {
+                "name": "complete_blood_count_&_esr",
+                "field": "text"
+            },
+            {
+                "name": "complete_blood_picture",
+                "field": "text"
+            },
+            {
+                "name": "coombs_test_direct",
+                "field": "text"
+            },
+            {
+                "name": "coombs_test_indirect",
+                "field": "text"
+            },
+            {
+                "name": "differential_count_(dc)",
+                "field": "text"
+            },
+            {
+                "name": "erythrocyte_count",
+                "field": "text"
+            },
+            {
+                "name": "erythrocyte_sedimentation_rate_esr",
+                "field": "text"
+            },
+            {
+                "name": "factor_ix",
+                "field": "text"
+            },
+            {
+                "name": "factor_v",
+                "field": "text"
+            },
+            {
+                "name": "factor_viii",
+                "field": "text"
+            },
+            {
+                "name": "fibrinogen",
+                "field": "text"
+            },
+            {
+                "name": "fibrinogen_degradation_product_fdp",
+                "field": "text"
+            },
+            {
+                "name": "hemoglobin_hb",
+                "field": "text"
+            },
+            {
+                "name": "hemoglobin_electrophoresis",
+                "field": "text"
+            },
+            {
+                "name": "lupus_anticoagulant",
+                "field": "text"
+            },
+            {
+                "name": "malaria_falciparum_and_vivax_antigen_v_&_f",
+                "field": "text"
+            },
+            {
+                "name": "malarial_parasite_identification",
+                "field": "text"
+            },
+            {
+                "name": "mean_corpuscular_hemoglobin__mch",
+                "field": "text"
+            },
+            {
+                "name": "mean_corpuscular_hemoglobin_concentration_mchc",
+                "field": "text"
+            },
+            {
+                "name": "mean_corpuscular_volume_mcv",
+                "field": "text"
+            },
+            {
+                "name": "mean_platelet_volume_mpv",
+                "field": "text"
+            },
+            {
+                "name": "meth_hemoglobin",
+                "field": "text"
+            },
+            {
+                "name": "packed_cell_volume_pcv",
+                "field": "text"
+            },
+            {
+                "name": "platelet_count",
+                "field": "text"
+            },
+            {
+                "name": "protein_c_activity",
+                "field": "text"
+            },
+            {
+                "name": "protein_s_activity",
+                "field": "text"
+            },
+            {
+                "name": "prothrombin_time_pt",
+                "field": "text"
+            },
+            {
+                "name": "qbc_malaria_test",
+                "field": "text"
+            },
+            {
+                "name": "reticulocyte_count",
+                "field": "text"
+            },
+            {
+                "name": "rh_antibody_-_titre",
+                "field": "text"
+            },
+            {
+                "name": "thrombin_time",
+                "field": "text"
+            },
+            {
+                "name": "total_and_differential_count_tc_&_dc",
+                "field": "text"
+            },
+            {
+                "name": "wbc_count",
+                "field": "text"
+            }
+        ]
+    },
+    "biochemistry": {
+		"requirement": "optional",
+        "parameters": [
+            {
+                "name": "test_name",
+                "field": "text"
+            },
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "specimen_type",
+                "field": "text"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            },
+            {
+                "name": "ada_level",
+                "field": "text"
+            },
+            {
+                "name": "albumin",
+                "field": "text"
+            },
+            {
+                "name": "alcohol_level",
+                "field": "text"
+            },
+            {
+                "name": "aldolase",
+                "field": "text"
+            },
+            {
+                "name": "aldosterone",
+                "field": "text"
+            },
+            {
+                "name": "alpha_feto_protein",
+                "field": "text"
+            },
+            {
+                "name": "aluminium",
+                "field": "text"
+            },
+            {
+                "name": "ammonia_",
+                "field": "text"
+            },
+            {
+                "name": "amylase",
+                "field": "text"
+            },
+            {
+                "name": "angiotensin_converting_enzyme",
+                "field": "text"
+            },
+            {
+                "name": "bicarbonate",
+                "field": "text"
+            },
+            {
+                "name": "calcitonin",
+                "field": "text"
+            },
+            {
+                "name": "calcium",
+                "field": "text"
+            },
+            {
+                "name": "ceruloplasmin",
+                "field": "text"
+            },
+            {
+                "name": "chloride",
+                "field": "text"
+            },
+            {
+                "name": "copper",
+                "field": "text"
+            },
+            {
+                "name": "cortisol",
+                "field": "text"
+            },
+            {
+                "name": "creatinine",
+                "field": "text"
+            },
+            {
+                "name": "ferritin",
+                "field": "text"
+            },
+            {
+                "name": "folate",
+                "field": "text"
+            },
+            {
+                "name": "free_beta_hcg",
+                "field": "text"
+            },
+            {
+                "name": "gastrin",
+                "field": "text"
+            },
+            {
+                "name": "globulin",
+                "field": "text"
+            },
+            {
+                "name": "insulin",
+                "field": "text"
+            },
+            {
+                "name": "iron",
+                "field": "text"
+            },
+            {
+                "name": "lactate_dehydrogenase",
+                "field": "text"
+            },
+            {
+                "name": "lipase",
+                "field": "text"
+            },
+            {
+                "name": "lithium",
+                "field": "text"
+            },
+            {
+                "name": "magnesium",
+                "field": "text"
+            },
+            {
+                "name": "phosphorus",
+                "field": "text"
+            },
+            {
+                "name": "potassium",
+                "field": "text"
+            },
+            {
+                "name": "progesterone",
+                "field": "text"
+            },
+            {
+                "name": "prolactin",
+                "field": "text"
+            },
+            {
+                "name": "protein_electrophoresis",
+                "field": "text"
+            },
+            {
+                "name": "sodium",
+                "field": "text"
+            },
+            {
+                "name": "thyroglobulin",
+                "field": "text"
+            },
+            {
+                "name": "total_beta_hcg",
+                "field": "text"
+            },
+            {
+                "name": "transferrin",
+                "field": "text"
+            },
+            {
+                "name": "triglycerides",
+                "field": "text"
+            },
+            {
+                "name": "urea",
+                "field": "text"
+            },
+            {
+                "name": "tacrolimus_level",
+                "field": "text"
+            },
+            {
+                "name": "dihydroxy_vitamin_d",
+                "field": "text"
+            },
+            {
+                "name": "hydroxyprogesterone",
+                "field": "text"
+            },
+            {
+                "name": "17-ketosteroids",
+                "field": "text"
+            },
+            {
+                "name": "25_hydroxy_vitamin_d",
+                "field": "text"
+            },
+            {
+                "name": "acid_phosphatase",
+                "field": "text"
+            },
+            {
+                "name": "adrenocorticotrophic_hormone",
+                "field": "text"
+            },
+            {
+                "name": "alanine_aminotransferase",
+                "field": "text"
+            },
+            {
+                "name": "albumin/globulin_ratio",
+                "field": "text"
+            },
+            {
+                "name": "alkaline_phosphatase",
+                "field": "text"
+            },
+            {
+                "name": "alpha_1_antitrypsinandrostenedione",
+                "field": "text"
+            },
+            {
+                "name": "anti_streptolysin_o_aso_titre",
+                "field": "text"
+            },
+            {
+                "name": "anti_thyroglobulin_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_thyroperoxidase_antibody",
+                "field": "text"
+            },
+            {
+                "name": "apolipoprotein_a1",
+                "field": "text"
+            },
+            {
+                "name": "apolipoprotein_a1/b_ratio",
+                "field": "text"
+            },
+            {
+                "name": "apolipoprotein_b",
+                "field": "text"
+            },
+            {
+                "name": "aspartate_aminotransferase",
+                "field": "text"
+            },
+            {
+                "name": "b_type_natriuretic_peptide",
+                "field": "text"
+            },
+            {
+                "name": "blood_arsenic_level",
+                "field": "text"
+            },
+            {
+                "name": "blood_lead",
+                "field": "text"
+            },
+            {
+                "name": "blood_urea_nitrogen",
+                "field": "text"
+            },
+            {
+                "name": "bun/creatinine_ratio",
+                "field": "text"
+            },
+            {
+                "name": "c-peptide",
+                "field": "text"
+            },
+            {
+                "name": "c-reactive_protein_crp",
+                "field": "text"
+            },
+            {
+                "name": "ca_15_3",
+                "field": "text"
+            },
+            {
+                "name": "ca_19_9",
+                "field": "text"
+            },
+            {
+                "name": "ca_125",
+                "field": "text"
+            },
+            {
+                "name": "calcium_creatinine_ratio",
+                "field": "text"
+            },
+            {
+                "name": "carcino_embryonic_antigen_cholinesterase",
+                "field": "text"
+            },
+            {
+                "name": "complement_3_c3",
+                "field": "text"
+            },
+            {
+                "name": "complement_4_c4",
+                "field": "text"
+            },
+            {
+                "name": "creatine_kinase_ck",
+                "field": "text"
+            },
+            {
+                "name": "creatine_kinase_mb_fraction_ckmb",
+                "field": "text"
+            },
+            {
+                "name": "creatinine_clearance_test",
+                "field": "text"
+            },
+            {
+                "name": "cyclosporine_level",
+                "field": "text"
+            },
+            {
+                "name": "d-dimerdehydroepiandrosterone",
+                "field": "text"
+            },
+            {
+                "name": "dehydroepiandrosterone_sulphate",
+                "field": "text"
+            },
+            {
+                "name": "digoxin_level",
+                "field": "text"
+            },
+            {
+                "name": "direct_bilirubin",
+                "field": "text"
+            },
+            {
+                "name": "erythropoietin_epo",
+                "field": "text"
+            },
+            {
+                "name": "estradiol_e2",
+                "field": "text"
+            },
+            {
+                "name": "fasting_blood_glucose",
+                "field": "text"
+            },
+            {
+                "name": "fasting_urine_glucose",
+                "field": "text"
+            },
+            {
+                "name": "follicle_stimulating_hormone_fsh",
+                "field": "text"
+            },
+            {
+                "name": "post_prandial_blood_glucose",
+                "field": "text"
+            },
+            {
+                "name": "post_prandial_urine_glucoseprocalcitonin",
+                "field": "text"
+            },
+            {
+                "name": "prostate_specific_antigen",
+                "field": "text"
+            },
+            {
+                "name": "prostatic_acid_phosphatase",
+                "field": "text"
+            },
+            {
+                "name": "random_blood_glucose",
+                "field": "text"
+            },
+            {
+                "name": "random_urine_glucose",
+                "field": "text"
+            },
+            {
+                "name": "rbc_folate",
+                "field": "text"
+            },
+            {
+                "name": "thyroid_stimulating_hormone_tsh",
+                "field": "text"
+            },
+            {
+                "name": "total_bilirubin",
+                "field": "text"
+            },
+            {
+                "name": "total_cholesterol",
+                "field": "text"
+            },
+            {
+                "name": "total_iron_binding_capacity_tibc",
+                "field": "text"
+            },
+            {
+                "name": "total_protein",
+                "field": "text"
+            },
+            {
+                "name": "total_testosterone",
+                "field": "text"
+            },
+            {
+                "name": "total_thyroxine_tt4",
+                "field": "text"
+            },
+            {
+                "name": "total_triiodothyronine_tt3",
+                "field": "text"
+            },
+            {
+                "name": "total/hdl_cholesterol_ratio",
+                "field": "text"
+            },
+            {
+                "name": "transferrin_saturation",
+                "field": "text"
+            },
+            {
+                "name": "troponin_t",
+                "field": "text"
+            },
+            {
+                "name": "troponin_i_qualitative",
+                "field": "text"
+            },
+            {
+                "name": "unconjugated_estriol_e3",
+                "field": "text"
+            },
+            {
+                "name": "urea/creatinine_ratio",
+                "field": "text"
+            },
+            {
+                "name": "uric_acid",
+                "field": "text"
+            },
+            {
+                "name": "urinary_copper",
+                "field": "text"
+            },
+            {
+                "name": "unsaturated_iron_binding_capacity_uibc",
+                "field": "text"
+            },
+            {
+                "name": "vitamin_b12_",
+                "field": "text"
+            },
+            {
+                "name": "vldl_cholesterol",
+                "field": "text"
+            }
+        ]
+    },
+    "urinalysis": {
+		"requirement": "optional",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "specimen_type",
+                "field": "text"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            },
+            {
+                "name": "specific_gravity",
+                "field": "text"
+            },
+            {
+                "name": "protein",
+                "field": "text"
+            },
+            {
+                "name": "glucose",
+                "field": "text"
+            },
+            {
+                "name": "porphyrin",
+                "field": "text"
+            },
+            {
+                "name": "microscopic_examination",
+                "field": "text"
+            },
+            {
+                "name": "ketones",
+                "field": "text"
+            },
+            {
+                "name": "bilirubins",
+                "field": "text"
+            },
+            {
+                "name": "uroblinogen",
+                "field": "text"
+            },
+            {
+                "name": "nitrate",
+                "field": "text"
+            },
+            {
+                "name": "rbcs",
+                "field": "text"
+            },
+            {
+                "name": "wbcs",
+                "field": "text"
+            },
+            {
+                "name": "epithelial_cells",
+                "field": "text"
+            },
+            {
+                "name": "crystals",
+                "field": "text"
+            },
+            {
+                "name": "amphetamines",
+                "field": "text"
+            },
+            {
+                "name": "amylase",
+                "field": "text"
+            },
+            {
+                "name": "arsenic_level",
+                "field": "text"
+            },
+            {
+                "name": "barbiturates",
+                "field": "text"
+            },
+            {
+                "name": "benzodiazepines",
+                "field": "text"
+            },
+            {
+                "name": "calcium",
+                "field": "text"
+            },
+            {
+                "name": "cannabinoids",
+                "field": "text"
+            },
+            {
+                "name": "catecholamines",
+                "field": "text"
+            },
+            {
+                "name": "chloride",
+                "field": "text"
+            },
+            {
+                "name": "cocaine",
+                "field": "text"
+            },
+            {
+                "name": "cortisol",
+                "field": "text"
+            },
+            {
+                "name": "creatinine_24_hrs",
+                "field": "text"
+            },
+            {
+                "name": "ecstasy/mdma_",
+                "field": "text"
+            },
+            {
+                "name": "epinephrine",
+                "field": "text"
+            },
+            {
+                "name": "hydroxy_indole_acetic_acid",
+                "field": "text"
+            },
+            {
+                "name": "methodone",
+                "field": "text"
+            },
+            {
+                "name": "microalbumin_24_hrs",
+                "field": "text"
+            },
+            {
+                "name": "microalbumin_spot_measurement",
+                "field": "text"
+            },
+            {
+                "name": "opiates_screen",
+                "field": "text"
+            },
+            {
+                "name": "phencyclidine",
+                "field": "text"
+            },
+            {
+                "name": "phosphorus",
+                "field": "text"
+            },
+            {
+                "name": "potassium",
+                "field": "text"
+            },
+            {
+                "name": "protein_24_hrs",
+                "field": "text"
+            },
+            {
+                "name": "protein_creatinine_ratio",
+                "field": "text"
+            },
+            {
+                "name": "protein_electrophoresis",
+                "field": "text"
+            },
+            {
+                "name": "qualitative_beta_hcg",
+                "field": "text"
+            },
+            {
+                "name": "sodium",
+                "field": "text"
+            },
+            {
+                "name": "urea_spot_measurement",
+                "field": "text"
+            },
+            {
+                "name": "uric_acid_(24_hrs)",
+                "field": "text"
+            },
+            {
+                "name": "uric_acid_spot_measurement",
+                "field": "text"
+            }
+        ]
+    },
+    "inflammatory_markers": {
+		"requirement": "optional",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "specimen_type",
+                "field": "text"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            },
+            {
+                "name": "crp",
+                "field": "text"
+            },
+            {
+                "name": "d-dimer",
+                "field": "text"
+            },
+            {
+                "name": "ferritin",
+                "field": "text"
+            },
+            {
+                "name": "il-1ra",
+                "field": "text"
+            },
+            {
+                "name": "il-18",
+                "field": "text"
+            },
+            {
+                "name": "il-10",
+                "field": "text"
+            },
+            {
+                "name": "albumin",
+                "field": "text"
+            },
+            {
+                "name": "ldh",
+                "field": "text"
+            },
+            {
+                "name": "lbp",
+                "field": "text"
+            },
+            {
+                "name": "hmgb1",
+                "field": "text"
+            },
+            {
+                "name": "stnf-ri/s",
+                "field": "text"
+            },
+            {
+                "name": "tnf-rii",
+                "field": "text"
+            }
+        ]
+    },
+    "serology": {
+		"requirement": "optional",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "specimen_type",
+                "field": "text"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            },
+            {
+                "name": "anti_pcna_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_pm_scl_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_riboprotein",
+                "field": "text"
+            },
+            {
+                "name": "anti_nrnp/sm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_cardiolipin_iga_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_cardiolipin_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_cardiolipin_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_echinococcus_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_gliadin_iga_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_gliadin_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_jo1_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_lkm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_mitochondrial_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_mitochondrial_antibody_qualitative_ifa_method",
+                "field": "text"
+            },
+            {
+                "name": "anti_nuclear_antibody_ana",
+                "field": "text"
+            },
+            {
+                "name": "anti_nuclear_antibody_qualitative_ifa_method",
+                "field": "text"
+            },
+            {
+                "name": "anti_nuclear_antibody_titres_ifa_method",
+                "field": "text"
+            },
+            {
+                "name": "anti_phospholipid_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_phospholipid_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_rho52_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_scl_70_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_smith_sm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_smooth_muscle_antibody_asma_titres_ifa_method",
+                "field": "text"
+            },
+            {
+                "name": "anti_smooth_muscle_antibody_qualitative_ifa_method",
+                "field": "text"
+            },
+            {
+                "name": "anti_sperm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_ss_a_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_ss_b_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "anti_dsdna_antibody_",
+                "field": "text"
+            },
+            {
+                "name": "anti_dsdna_antibody_qualitative_ifa_method",
+                "field": "text"
+            },
+            {
+                "name": "anti_dsdna_antibody_titres_ifa_method",
+                "field": "text"
+            },
+            {
+                "name": "nucleosomes",
+                "field": "text"
+            },
+            {
+                "name": "brucella_antibody_screen",
+                "field": "text"
+            },
+            {
+                "name": "brucella_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "brucella_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "chikungunya_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "cyclic_citrullinated_peptide_antibody",
+                "field": "text"
+            },
+            {
+                "name": "cysticercosis_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "cytomegalo_virus_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "cytomegalo_virus_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "dengue_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "dengue_igg_antibody_rapid_card_test",
+                "field": "text"
+            },
+            {
+                "name": "dengue_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "dengue_igm_antibody_rapid_card_test",
+                "field": "text"
+            },
+            {
+                "name": "dengue_ns1_antigen_elisa",
+                "field": "text"
+            },
+            {
+                "name": "dengue_ns1_antigen_card",
+                "field": "text"
+            },
+            {
+                "name": "glomerular_basement_membrane_igg_antibody_",
+                "field": "text"
+            },
+            {
+                "name": "helicobacter_pylori_iga_antibody",
+                "field": "text"
+            },
+            {
+                "name": "helicobacter_pylori_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "helicobacter_pylori_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_a_virus_antibody_hav_total_",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_a_virus_igm_antibody_hav_igm",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_b_core_antibody_total_hbcab_total",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_b_core_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_b_envelope_antibody",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_b_envelope_antigen",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_b_surface_antibody",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_b_surface_antigen_hbsag",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_b_surface_antigen_rapid_card_test",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_c_virus_(hcv)_antibody",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_c_virus_rapid_card_test",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_e_virus_igg_antibody_hev_igg",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_e_virus_igm_antibody_hev_igm",
+                "field": "text"
+            },
+            {
+                "name": "herpes_simplex_virus_1_&_2_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "herpes_simplex_virus_1_&_2_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "herpes_simplex_virus_1_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "herpes_simplex_virus_1_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "herpes_simplex_virus_2_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "herpes_simplex_virus_2_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "hiv_1_&_2_antibody",
+                "field": "text"
+            },
+            {
+                "name": "hiv_1_&_2_antibody_rapid_card_method",
+                "field": "text"
+            },
+            {
+                "name": "hiv_western_blot",
+                "field": "text"
+            },
+            {
+                "name": "infectious_mononucleosis_test",
+                "field": "text"
+            },
+            {
+                "name": "interferon_gamma_assay",
+                "field": "text"
+            },
+            {
+                "name": "leptospira_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "leptospira_igg_antibody_rapid_card_test",
+                "field": "text"
+            },
+            {
+                "name": "leptospira_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "leptospira_igm_antibody_rapid_card_test",
+                "field": "text"
+            },
+            {
+                "name": "measles_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "measles_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "microfilaria_antigen",
+                "field": "text"
+            },
+            {
+                "name": "mumps_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "mumps_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "parietal_cell_antibody",
+                "field": "text"
+            },
+            {
+                "name": "rapid_plasma_reagin_test",
+                "field": "text"
+            },
+            {
+                "name": "rheumatoid_factor",
+                "field": "text"
+            },
+            {
+                "name": "rheumatoid_factor_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "rheumatoid_factor_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "rubella_virus_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "rubella_virus_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "salmonella_typhi_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "salmonella_typhi_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "toxoplasma_gondii_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "toxoplasma_gondii_igm_antibody",
+                "field": "text"
+            },
+            {
+                "name": "treponema_pallidum_hemagglutination_tpha",
+                "field": "text"
+            },
+            {
+                "name": "varicella_zoster_igg_antibody",
+                "field": "text"
+            },
+            {
+                "name": "varicella_zoster_igm_antibod",
+                "field": "text"
+            }
+        ]
+    },
+    "molecular_biology": {
+		"requirement": "optional",
+        "parameters": [
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "specimen_type",
+                "field": "text"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            },
+            {
+                "name": "factor_v_leiden_mutation_screening",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_b_virus_dna_qualitative_pcr",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_b_virus_quantitative_pcr",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_c_virus_genotype",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_c_virus_qualitative_pcr",
+                "field": "text"
+            },
+            {
+                "name": "hepatitis_c_virus_quantitative_pcr",
+                "field": "text"
+            },
+            {
+                "name": "hiv_1_rna_qualitative_pcr",
+                "field": "text"
+            },
+            {
+                "name": "hiv_1_rna_quantitative_pcr",
+                "field": "text"
+            },
+            {
+                "name": "mycobacterium_tuberculosis_qualitative_pcr",
+                "field": "text"
+            }
+        ]
+    },
+    "key": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "test_type",
+                "field": "text"
+            },
+            {
+                "name": "time_of_test",
+                "field": "text"
+            },
+            {
+                "name": "specimen_type",
+                "field": "text"
+            },
+            {
+                "name": "testing_device",
+                "field": "text"
+            },
+            {
+                "name": "testing_center",
+                "field": "text"
+            },
+            {
+                "name": "comment",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "auxillary_details": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "medicine",
+                "field": "text"
+            },
+            {
+                "name": "dosage",
+                "field": "text"
+            },
+            {
+                "name": "duration",
+                "field": "text"
+            },
+            {
+                "name": "vaccine",
+                "field": "text"
+            },
+            {
+                "name": "vaccine_timestamp",
+                "field": "text"
+            },
+            {
+                "name": "diet",
+                "field": "text"
+            },
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    },
+    "genetics": {
+		"requirement": "mandatory",
+        "parameters": [
+            {
+                "name": "key",
+                "field": "text"
+            }
+        ]
+    }
+}
