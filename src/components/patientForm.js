@@ -15,6 +15,7 @@ import * as FiIcons from 'react-icons/fi';
 import Navbar from './navbar';
 import {useForm, Controller} from 'react-hook-form';
 import {minioClient, minioBucket} from './minio';
+import { AirlineSeatFlat } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -107,8 +108,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 function PatientForm(props) {
     const classes = useStyles();
+    const [topAIpred,topsetAIpred] = React.useState('');
+    const [leftAIpred,leftsetAIpred] = React.useState('');
+    const [rightAIpred,rightsetAIpred] = React.useState('');
+    const [bottomAIpred,bottomsetAIpred] = React.useState('');
+    const [othersAIpred,otherssetAIpred] = React.useState('');
     const [selectCategory,setSelectCategory] = React.useState('');
     const [requirement,setRequirement] = React.useState('manual');
     const [FormFields,setFormFields] = React.useState({});
@@ -120,6 +127,33 @@ function PatientForm(props) {
     const [stationShow , setStationShow] = React.useState(false);
     //console.log(props.values.userInfo)
     const { handleSubmit, register, formState: { errors }, control, reset, clearErrors, setValue } = useForm();
+
+    const AIpredswitch = (predFeildName) => {
+        switch(predFeildName) {
+    
+          case "top":   return topAIpred;
+          case "bottom":   return bottomAIpred;
+          case "left": return leftAIpred;
+          case "right":  return rightAIpred;
+          case "other":  return othersAIpred;
+    
+          default:      return ''
+        }
+      }
+
+      const setAIpredswitch = (predFeildName) => {
+        switch(predFeildName) {
+    
+          case "top":   return topsetAIpred;
+          case "bottom":   return bottomsetAIpred;
+          case "left": return leftsetAIpred;
+          case "right":  return rightsetAIpred;
+          case "other":  return otherssetAIpred;
+    
+          default:      return otherssetAIpred
+        }
+      }
+    
 
     React.useEffect(() => {
         if(userInfo.admin){
@@ -335,8 +369,27 @@ function PatientForm(props) {
         return url;
     }
 
-    const uploadImage = async e => {
+    const uploadImage = async (e, field_name) => {
+        const setfieldpred = setAIpredswitch(field_name)
         const file = e.target.files[0]
+
+        let formDataflask = new FormData();
+  
+        //Adding files to the formdata
+        formDataflask.append("image", file);
+        formDataflask.append("name", "oral_cavity");
+      
+        Axios({
+          url: "http://localhost:6500/upload2",
+          method: "POST",
+          data: formDataflask,
+        })
+          .then((res) => {
+            console.log(res.data);
+            setfieldpred("AI prediction: "+res.data);
+           }) // Handle the response from backend here
+          .catch((err) => { }); // Catch errors if any
+        
         var fileExt = file.name.split('.').pop()
         var orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase()
         var driveName = localStorage.getItem("drive_selected_name").replace(/ /g, "_").toLowerCase()
@@ -443,7 +496,7 @@ function PatientForm(props) {
         return obj;
     }
 
-    const FormData = !selectCategory ? null :
+    const formData = !selectCategory ? null :
     (
         <form onSubmit={handleSubmit(submit)}>
             <div id="form-field" className="formFields" >
@@ -609,12 +662,13 @@ function PatientForm(props) {
                                         {...register(field.name, field.rules)}
                                         onChange={e => {
                                             register(field.name, field.rules).onChange(e);
-                                            uploadImage(e);
+                                            uploadImage(e, field.name);
                                         }}
                                         disabled={disabled}
                                         name={field.name}
                                         style={{width:"200px",color:"#05056B"}}
                                     />
+                                    <label style={{marginBottom:"0px",color:"#05056B"}} className="fileLabel">{AIpredswitch(field.name)}</label>
                                     {
                                         !data[field.name] ? null :
                                             <img src={getUrl(data[field.name])} style={{height: "100px",width:"100px",border:"solid 2px",marginTop:"10px"}} alt="preview"  onClick={() => previewImage(getUrl(data[field.name]))} />
@@ -714,7 +768,7 @@ function PatientForm(props) {
 
                                     <>
                                     {
-                                        requirement === "manual" ? <>{FormData}</> : (
+                                        requirement === "manual" ? <>{formData}</> : (
                                             <>
                                                 <input type="file" accept="image/*,.pdf" style={{marginBottom:"20px",width:"200px",color:"#05056B"}} onChange={uploadOnlyImage} disabled={disabled}  />
                                                 {
@@ -730,7 +784,7 @@ function PatientForm(props) {
                                     </>
                                 </div>
                                )
-                               : <>{FormData}</>
+                               : <>{formData}</>
                             }
                         </>
                     ) : null
