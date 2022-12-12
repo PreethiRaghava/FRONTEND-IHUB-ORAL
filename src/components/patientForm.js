@@ -16,6 +16,7 @@ import Navbar from './navbar';
 import {useForm, Controller} from 'react-hook-form';
 import {minioClient, minioBucket} from './minio';
 import { AirlineSeatFlat } from '@material-ui/icons';
+import Popup from './popup';
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -111,6 +112,11 @@ const useStyles = makeStyles((theme) => ({
 
 function PatientForm(props) {
     const classes = useStyles();
+    const [topbuttonPopup, topsetButtonPopup] = React.useState(false);
+    const [leftbuttonPopup, leftsetButtonPopup] = React.useState(false);
+    const [rightbuttonPopup, rightsetButtonPopup] = React.useState(false);
+    const [bottombuttonPopup, bottomsetButtonPopup] = React.useState(false);
+    const [othersbuttonPopup, otherssetButtonPopup] = React.useState(false);
     const [topAIpred,topsetAIpred] = React.useState('');
     const [leftAIpred,leftsetAIpred] = React.useState('');
     const [rightAIpred,rightsetAIpred] = React.useState('');
@@ -125,10 +131,79 @@ function PatientForm(props) {
     const [loading , setLoading] = React.useState(false);
     const userInfo = props.values.userInfo;
     const [stationShow , setStationShow] = React.useState(false);
-    //console.log(props.values.userInfo)
-    const { handleSubmit, register, formState: { errors }, control, reset, clearErrors, setValue } = useForm();
 
-    const AIpredswitch = (predFeildName) => {
+    //console.log(props.values.userInfo)
+
+    function dataURLtoFile(dataurl, filename) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while(n--){
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new File([u8arr], filename, {type:mime});
+        }
+
+    function handleTakePhotoAnimationDone (dataUri) {
+        console.log('takePhoto');
+        var file = dataURLtoFile(dataUri, 'filename.png');
+        console.log(file);
+        topsetButtonPopup(false);
+        leftsetButtonPopup(false);
+        rightsetButtonPopup(false);
+        bottomsetButtonPopup(false);
+        otherssetButtonPopup(false);
+      }
+    
+
+    const { handleSubmit, register, formState: { errors }, control, reset, clearErrors, setValue } = useForm();
+    const popupswitch = (predFeildName) => {
+        switch(predFeildName) {
+    
+          case "top":   return topbuttonPopup;
+          case "bottom":   return bottombuttonPopup;
+          case "left": return leftbuttonPopup;
+          case "right":  return rightbuttonPopup;
+          case "other":  return othersbuttonPopup;
+    
+          default:      return false
+        }
+      }
+
+      const setpopupswitch = (predFeildName) => {
+        console.log('inside setpopupswitch');
+        console.log(predFeildName);
+        console.log(topbuttonPopup, bottombuttonPopup, leftbuttonPopup, rightbuttonPopup, othersbuttonPopup);
+
+        switch(predFeildName) {
+    
+            case "top":   return topsetButtonPopup;
+            case "bottom":   return bottomsetButtonPopup;
+            case "left": return leftsetButtonPopup;
+            case "right":  return rightsetButtonPopup;
+            case "other":  return otherssetButtonPopup;
+    
+            default:      return otherssetButtonPopup
+        }
+        }
+
+
+        function setpopupswitchtrue(predFeildName) {
+            console.log('inside setpopupswitchtrue');
+            console.log(predFeildName);
+            console.log(topbuttonPopup, bottombuttonPopup, leftbuttonPopup, rightbuttonPopup, othersbuttonPopup);
+                switch(predFeildName) {
+        
+                case "top":   topsetButtonPopup(true);
+                case "bottom":   bottomsetButtonPopup(true);
+                case "left": leftsetButtonPopup(true);
+                case "right":  rightsetButtonPopup(true);
+                case "other":  otherssetButtonPopup(true);
+        
+                default:      otherssetButtonPopup(false)
+            }
+        }
+        
+        const AIpredswitch = (predFeildName) => {
         switch(predFeildName) {
     
           case "top":   return topAIpred;
@@ -372,7 +447,7 @@ function PatientForm(props) {
     const uploadImage = async (e, field_name) => {
         const setfieldpred = setAIpredswitch(field_name)
         const file = e.target.files[0]
-
+        console.log(file)
         let formDataflask = new FormData();
   
         //Adding files to the formdata
@@ -664,10 +739,16 @@ function PatientForm(props) {
                                             register(field.name, field.rules).onChange(e);
                                             uploadImage(e, field.name);
                                         }}
+
                                         disabled={disabled}
                                         name={field.name}
                                         style={{width:"200px",color:"#05056B"}}
                                     />
+                                    <div disabled={disabled} id={field.name+'overridediv'} className={field.name+"overridesubmitButton"} onClick={() => setpopupswitchtrue(field.name)} > {"Open Camera for: "+field.name}
+                                    <Popup trigger={popupswitch(field.name)} triggerhandleTakePhotoAnimationDone={handleTakePhotoAnimationDone}>
+                                        {"Button Camera for: "+field.name}
+                                    </Popup>
+                                    </div>
                                     <label style={{marginBottom:"0px",color:"#05056B"}} className="fileLabel">{AIpredswitch(field.name)}</label>
                                     {
                                         !data[field.name] ? null :
