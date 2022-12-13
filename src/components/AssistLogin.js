@@ -73,8 +73,13 @@ sendotp = (e) => {
         this.configureCaptcha();
         const appVerifier = window.recaptchaVerifier;
         const mobile_with_code = `+91${this.props.values.phone}`
-        firebase.auth().signInWithPhoneNumber(mobile_with_code, appVerifier)
-            .then((confirmationResult) => {
+        // firebase.auth().signInWithPhoneNumber(mobile_with_code, appVerifier)
+        Axios({
+            url: "http://localhost:6500/auth_phno",
+            method: "POST",
+            data: {'number':mobile_with_code},
+          })
+              .then((confirmationResult) => {
                 // SMS sent
                 window.confirmationResult = confirmationResult;
                 console.log("OTP has been sent")

@@ -143,10 +143,11 @@ function PatientForm(props) {
             return new File([u8arr], filename, {type:mime});
         }
 
-    function handleTakePhotoAnimationDone (dataUri) {
-        console.log('takePhoto');
-        var file = dataURLtoFile(dataUri, 'filename.png');
-        console.log(file);
+    function handleTakePhotoAnimationDone (file, name) {
+        
+        let e = {};
+        e['target']={'name':name, "files":[file]};
+        uploadImage(e);        
         topsetButtonPopup(false);
         leftsetButtonPopup(false);
         rightsetButtonPopup(false);
@@ -444,10 +445,9 @@ function PatientForm(props) {
         return url;
     }
 
-    const uploadImage = async (e, field_name) => {
-        const setfieldpred = setAIpredswitch(field_name)
+    const uploadImage = async (e) => {
+        const setfieldpred = setAIpredswitch(e.target.name)
         const file = e.target.files[0]
-        console.log(file)
         let formDataflask = new FormData();
   
         //Adding files to the formdata
@@ -455,7 +455,7 @@ function PatientForm(props) {
         formDataflask.append("name", "oral_cavity");
       
         Axios({
-          url: "http://localhost:6500/upload2",
+          url: "http://localhost:6500/upload",
           method: "POST",
           data: formDataflask,
         })
@@ -737,7 +737,7 @@ function PatientForm(props) {
                                         {...register(field.name, field.rules)}
                                         onChange={e => {
                                             register(field.name, field.rules).onChange(e);
-                                            uploadImage(e, field.name);
+                                            uploadImage(e);
                                         }}
 
                                         disabled={disabled}
@@ -745,7 +745,7 @@ function PatientForm(props) {
                                         style={{width:"200px",color:"#05056B"}}
                                     />
                                     <div disabled={disabled} id={field.name+'overridediv'} className={field.name+"overridesubmitButton"} onClick={() => setpopupswitchtrue(field.name)} > {"Open Camera for: "+field.name}
-                                    <Popup trigger={popupswitch(field.name)} triggerhandleTakePhotoAnimationDone={handleTakePhotoAnimationDone}>
+                                    <Popup trigger={popupswitch(field.name)} triggerhandleTakePhotoAnimationDone={handleTakePhotoAnimationDone} field_name={field.name}>
                                         {"Button Camera for: "+field.name}
                                     </Popup>
                                     </div>
