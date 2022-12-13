@@ -455,7 +455,8 @@ function PatientForm(props) {
         formDataflask.append("name", "oral_cavity");
       
         Axios({
-          url: "http://localhost:6500/upload",
+            url: "http://192.168.1.144:6500/upload",
+            // url: "http://localhost:6500/upload",
           method: "POST",
           data: formDataflask,
         })
