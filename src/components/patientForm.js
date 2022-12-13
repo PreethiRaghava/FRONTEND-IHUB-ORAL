@@ -745,11 +745,11 @@ function PatientForm(props) {
                                         name={field.name}
                                         style={{width:"200px",color:"#05056B"}}
                                     />
-                                    <div disabled={disabled} id={field.name+'overridediv'} className={field.name+"overridesubmitButton"} onClick={() => setpopupswitchtrue(field.name)} > {"Open Camera for: "+field.name}
+                                    {/* <div disabled={disabled} id={field.name+'overridediv'} className={field.name+"overridesubmitButton"} onClick={() => setpopupswitchtrue(field.name)} > {"Open Camera for: "+field.name}
                                     <Popup trigger={popupswitch(field.name)} triggerhandleTakePhotoAnimationDone={handleTakePhotoAnimationDone} field_name={field.name}>
                                         {"Button Camera for: "+field.name}
                                     </Popup>
-                                    </div>
+                                    </div> */}
                                     <label style={{marginBottom:"0px",color:"#05056B"}} className="fileLabel">{AIpredswitch(field.name)}</label>
                                     {
                                         !data[field.name] ? null :
