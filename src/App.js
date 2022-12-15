@@ -19,6 +19,9 @@ import AdminAddDataForm from './components/adminDashboard/pages/adminAddDataForm
 import AdminReplaceDataForm from './components/adminDashboard/pages/adminReplace';
 
 function App() {
+  console.log('started the app');
+  console.log(process.env.REACT_APP_FLASK_URL);
+
   return (
     <Router basename={process.env.REACT_APP_URL_PREFIX}>
       <Switch>

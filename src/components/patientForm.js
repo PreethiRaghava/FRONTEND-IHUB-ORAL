@@ -478,7 +478,7 @@ function PatientForm(props) {
             if (err){
                 setLoading(false);
                 return console.log(err);
-            }
+            }            
             Axios.put(url,file)
             .then(res => {
                 setLoading(false);

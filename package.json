@@ -30,7 +30,7 @@
     "sortablejs": "^1.13.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_SERVER_IP=$(hostname -I| xargs) react-scripts start",
     "dev-win-start": "SET PORT=3000 && react-scripts start",
     "dev-start": "PORT=3000 react-scripts start",
     "build": "react-scripts build",
