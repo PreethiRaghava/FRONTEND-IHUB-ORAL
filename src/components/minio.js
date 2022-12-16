@@ -1,11 +1,11 @@
 var Minio = require("minio");
 
 var minioClient = new Minio.Client({
-  endPoint: process.env.REACT_APP_SERVER_IP,
-  port: 9000,
+  endPoint: process.env.REACT_APP_MINIO_ACCESS_PORT,
+  port: parseInt(process.env.REACT_APP_MINIO_ACCESS_PORT),
   useSSL: false,
-  accessKey: '0e3Logy2GLyQp08a',
-  secretKey: 'jZxtOXB4UKl8nqgvZASYkXk3XqpCq7Hk'
+  accessKey: process.env.REACT_APP_MINIO_ACCESS_KEY,
+  secretKey: process.env.REACT_APP_MINIO_ACCESS_SECRET
 });
 
 // var minioClient = new Minio.Client({
