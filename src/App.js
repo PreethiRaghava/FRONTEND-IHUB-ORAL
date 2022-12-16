@@ -21,6 +21,9 @@ import AdminReplaceDataForm from './components/adminDashboard/pages/adminReplace
 function App() {
   console.log('started the app');
   console.log(process.env.REACT_APP_FLASK_URL);
+  console.log(process.env.REACT_APP_FLASK_PORT);
+  console.log(process.env.REACT_APP_SERVER_IP);
+  console.log('ended the app');
 
   return (
     <Router basename={process.env.REACT_APP_URL_PREFIX}>
