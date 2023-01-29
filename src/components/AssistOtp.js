@@ -109,8 +109,8 @@ verify = (e) => {
     this.setState({loading:true})
     // window.confirmationResult.confirm(otp_code)
     Axios({
-        url: process.env.REACT_APP_FLASK_URL+"/auth_phno_otp",
-        // url: "http://localhost:6500/auth_phno_otp",
+        // url: process.env.REACT_APP_FLASK_URL+"/auth_phno_otp",
+        url: "http://localhost:6500/auth_phno_otp",
         method: "POST",
         data: {'number':this.props.values.phone,'otp':otp_code},})
     .then((result) => {

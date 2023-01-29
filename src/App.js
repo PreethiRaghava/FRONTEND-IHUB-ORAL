@@ -23,6 +23,8 @@ function App() {
   console.log(process.env.REACT_APP_FLASK_URL);
   console.log(process.env.REACT_APP_FLASK_PORT);
   console.log(process.env.REACT_APP_SERVER_IP);
+  console.log(process.env.REACT_APP_PROXY_DEV);
+  console.log(process.env.REACT_APP_PROXY_DEPLOY);
   console.log('ended the app');
 
   return (

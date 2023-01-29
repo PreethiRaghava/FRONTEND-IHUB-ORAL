@@ -75,8 +75,8 @@ sendotp = (e) => {
         const mobile_with_code = `+91${this.props.values.phone}`
         // firebase.auth().signInWithPhoneNumber(mobile_with_code, appVerifier)
         Axios({
-            url: process.env.REACT_APP_FLASK_URL+"/auth_phno",
-            // url: "http://localhost:6500/auth_phno",
+            // url: process.env.REACT_APP_FLASK_URL+"/auth_phno",
+            url: "http://localhost:6500/auth_phno",
             method: "POST",
             data: {'number':mobile_with_code},
           })
