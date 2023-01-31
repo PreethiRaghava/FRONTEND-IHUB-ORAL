@@ -69,12 +69,7 @@ sendotp = (e) => {
         this.configureCaptcha();
         const appVerifier = window.recaptchaVerifier;
         const mobile_with_code = `+91${this.props.values.phone}`
-        // firebase.auth().signInWithPhoneNumber(mobile_with_code, appVerifier)
-        Axios({
-            url: "http://localhost:6500/auth_phno",
-            method: "POST",
-            data: {'number':mobile_with_code},
-          })
+        firebase.auth().signInWithPhoneNumber(mobile_with_code, appVerifier)
             .then((confirmationResult) => {
                 // SMS sent
                 this.setState({loading:false})
@@ -108,11 +103,6 @@ verify = (e) => {
     }
     this.setState({loading:true})
     window.confirmationResult.confirm(otp_code)
-    // Axios({
-        // url: process.env.REACT_APP_FLASK_URL+"/auth_phno_otp",
-        // url: "http://localhost:6500/auth_phno_otp",
-        // method: "POST",
-        // data: {'number':this.props.values.phone,'otp':otp_code},})
     .then((result) => {
         console.log("User is verified");
         localStorage.setItem('assist_mobile_number',this.props.values.phone)
