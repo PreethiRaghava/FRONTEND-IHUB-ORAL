@@ -107,12 +107,12 @@ verify = (e) => {
         return;
     }
     this.setState({loading:true})
-    // window.confirmationResult.confirm(otp_code)
-    Axios({
+    window.confirmationResult.confirm(otp_code)
+    // Axios({
         // url: process.env.REACT_APP_FLASK_URL+"/auth_phno_otp",
-        url: "http://localhost:6500/auth_phno_otp",
-        method: "POST",
-        data: {'number':this.props.values.phone,'otp':otp_code},})
+        // url: "http://localhost:6500/auth_phno_otp",
+        // method: "POST",
+        // data: {'number':this.props.values.phone,'otp':otp_code},})
     .then((result) => {
         console.log("User is verified");
         localStorage.setItem('assist_mobile_number',this.props.values.phone)
