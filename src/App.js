@@ -29,6 +29,7 @@ function App() {
 
   return (
     <Router basename={process.env.REACT_APP_URL_PREFIX}>
+    {/* <Router> */}
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path="/login" component={LoginForm} />

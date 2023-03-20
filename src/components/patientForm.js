@@ -122,6 +122,13 @@ function PatientForm(props) {
     const [rightAIpred,rightsetAIpred] = React.useState('');
     const [bottomAIpred,bottomsetAIpred] = React.useState('');
     const [othersAIpred,otherssetAIpred] = React.useState('');
+    const [others2AIpred,others2setAIpred] = React.useState('');
+    const [topimagesrc,topsetimgsrc] = React.useState('');
+    const [leftimagesrc,leftsetimgsrc] = React.useState('');
+    const [rightimagesrc,rightsetimgsrc] = React.useState('');
+    const [bottomimagesrc,bottomsetimgsrc] = React.useState('');
+    const [othersimagesrc,otherssetimgsrc] = React.useState('');
+    const [others2imagesrc,others2setimgsrc] = React.useState('');
     const [selectCategory,setSelectCategory] = React.useState('');
     const [requirement,setRequirement] = React.useState('manual');
     const [FormFields,setFormFields] = React.useState({});
@@ -142,78 +149,22 @@ function PatientForm(props) {
             }
             return new File([u8arr], filename, {type:mime});
         }
-
-    function handleTakePhotoAnimationDone (file, name) {
-        
-        let e = {};
-        e['target']={'name':name, "files":[file]};
-        uploadImage(e);        
-        topsetButtonPopup(false);
-        leftsetButtonPopup(false);
-        rightsetButtonPopup(false);
-        bottomsetButtonPopup(false);
-        otherssetButtonPopup(false);
-      }
     
 
     const { handleSubmit, register, formState: { errors }, control, reset, clearErrors, setValue } = useForm();
-    const popupswitch = (predFeildName) => {
-        switch(predFeildName) {
-    
-          case "top":   return topbuttonPopup;
-          case "bottom":   return bottombuttonPopup;
-          case "left": return leftbuttonPopup;
-          case "right":  return rightbuttonPopup;
-          case "other":  return othersbuttonPopup;
-    
-          default:      return false
-        }
-      }
 
-      const setpopupswitch = (predFeildName) => {
-        console.log('inside setpopupswitch');
-        console.log(predFeildName);
-        console.log(topbuttonPopup, bottombuttonPopup, leftbuttonPopup, rightbuttonPopup, othersbuttonPopup);
-
-        switch(predFeildName) {
-    
-            case "top":   return topsetButtonPopup;
-            case "bottom":   return bottomsetButtonPopup;
-            case "left": return leftsetButtonPopup;
-            case "right":  return rightsetButtonPopup;
-            case "other":  return otherssetButtonPopup;
-    
-            default:      return otherssetButtonPopup
-        }
-        }
-
-
-        function setpopupswitchtrue(predFeildName) {
-            console.log('inside setpopupswitchtrue');
-            console.log(predFeildName);
-            console.log(topbuttonPopup, bottombuttonPopup, leftbuttonPopup, rightbuttonPopup, othersbuttonPopup);
-                switch(predFeildName) {
-        
-                case "top":   topsetButtonPopup(true);
-                case "bottom":   bottomsetButtonPopup(true);
-                case "left": leftsetButtonPopup(true);
-                case "right":  rightsetButtonPopup(true);
-                case "other":  otherssetButtonPopup(true);
-        
-                default:      otherssetButtonPopup(false)
-            }
-        }
-        
-        const AIpredswitch = (predFeildName) => {
+     
+    const AIpredswitch = (predFeildName) => {
         switch(predFeildName) {
     
           case "top":   return topAIpred;
           case "bottom":   return bottomAIpred;
           case "left": return leftAIpred;
           case "right":  return rightAIpred;
-          case "other":  return othersAIpred;
+          case "others":  return othersAIpred;
+          case "others2":  return others2AIpred;
     
-          default:      return ''
+          default: return ''
         }
       }
 
@@ -224,7 +175,36 @@ function PatientForm(props) {
           case "bottom":   return bottomsetAIpred;
           case "left": return leftsetAIpred;
           case "right":  return rightsetAIpred;
-          case "other":  return otherssetAIpred;
+          case "others":  return otherssetAIpred;
+          case "others2":  return others2setAIpred;
+    
+          default:      return otherssetAIpred
+        }
+      }
+    
+      const imgSrcSwitch = (predFeildName) => {
+        switch(predFeildName) {
+    
+          case "top":   return topimagesrc;
+          case "bottom":   return bottomimagesrc;
+          case "left": return leftimagesrc;
+          case "right":  return rightimagesrc;
+          case "others":  return othersimagesrc;
+          case "others2":  return others2imagesrc;
+    
+          default: return ''
+        }
+      }
+
+      const setImgSrcSwitch = (predFeildName) => {
+        switch(predFeildName) {
+    
+          case "top":   return topsetimgsrc;
+          case "bottom":   return bottomsetimgsrc;
+          case "left": return leftsetimgsrc;
+          case "right":  return rightsetimgsrc;
+          case "others":  return otherssetimgsrc;
+          case "others2":  return others2setimgsrc;
     
           default:      return otherssetAIpred
         }
@@ -434,15 +414,61 @@ function PatientForm(props) {
         setDisabled(false);
     }
 
-    const getUrl = path => {
+    // const getUrl = path => {
+    //     if(!path) return;
+    //     var url;
+    //     minioClient.presignedUrl('GET', minioBucket, path, 1*60*60, function(err, presignedUrl) {
+    //         if (err) return console.log(err)
+    //         // console.log(presignedUrl)
+    //         url = presignedUrl
+    //       })
+    //     return url;
+    // }
+
+    const miniosetUrl = async (blockfieldname, path ) => {
+        const setfieldurl = setImgSrcSwitch(blockfieldname);
+
+        
+        console.log('entered get url');
+        console.log(path);
         if(!path) return;
-        var url;
-        minioClient.presignedUrl('GET', minioBucket, path, 1*60*60, function(err, presignedUrl) {
-            if (err) return console.log(err)
-            // console.log(presignedUrl)
-            url = presignedUrl
-          })
-        return url;
+        // var minio_object_url;
+        
+        let formDataflask = new FormData();        
+        formDataflask.append("path", path);
+
+        Axios({
+            url: process.env.REACT_APP_FLASK_URL+"/get_minio_url",
+            method: "POST",
+            data: formDataflask,
+            })
+            .then((res) => {
+                setfieldurl(res.data.minio_url);
+            }).catch((err) => {
+                setfieldurl("");
+            });
+    }
+
+    const getUrl = (path) => {
+        console.log('entered get url');
+        console.log(path);
+        if(!path) return;
+        // var minio_object_url;
+        
+        let formDataflask = new FormData();        
+        formDataflask.append("path", path);
+
+        let minio_object_url = Axios({
+            url: process.env.REACT_APP_FLASK_URL+"/get_minio_url",
+            method: "POST",
+            data: formDataflask,
+            })
+            .then((res) => {
+                return res.data.minio_url;
+            }).catch((err) => {
+                return "";
+            });
+        return minio_object_url;
     }
 
     const uploadImage = async (e) => {
@@ -451,9 +477,19 @@ function PatientForm(props) {
         let formDataflask = new FormData();
   
         //Adding files to the formdata
+        
+        var fileExt = file.name.split('.').pop()
+        var orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase()
+        var driveName = localStorage.getItem("drive_selected_name").replace(/ /g, "_").toLowerCase()
+        var fieldName = e.target.name.replace(/ /g, "_").toLowerCase()
+        var filename = `${props.values.selectedPatientId}_${props.values.selectedVisit}_${fieldName}.${fileExt}`
+        var path = `form_data/${orgName}/${driveName}/${selectCategory}/${filename}`
+        
         formDataflask.append("image", file);
         formDataflask.append("name", "oral_cavity");
-      
+        formDataflask.append("path", path);
+
+        setLoading(true);
         Axios({
             url: process.env.REACT_APP_FLASK_URL+"/upload",
             // url: "http://192.168.1.144:6500/upload",
@@ -462,37 +498,37 @@ function PatientForm(props) {
           data: formDataflask,
         })
           .then((res) => {
+            setLoading(false);
+            setData({
+                ...data,
+                [e.target.name]: path
+            })
             console.log(res.data);
             setfieldpred("AI prediction: "+res.data);
-           }) // Handle the response from backend here
-          .catch((err) => { }); // Catch errors if any
+        }) // Handle the response from backend here
+          .catch((err) => {
+            setLoading(false);
+            console.log(err);
+           }); // Catch errors if any
         
-        var fileExt = file.name.split('.').pop()
-        var orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase()
-        var driveName = localStorage.getItem("drive_selected_name").replace(/ /g, "_").toLowerCase()
-        var fieldName = e.target.name.replace(/ /g, "_").toLowerCase()
-        var filename = `${props.values.selectedPatientId}_${props.values.selectedVisit}_${fieldName}.${fileExt}`
-        var path = `form_data/${orgName}/${driveName}/${selectCategory}/${filename}`
-
-        setLoading(true);
-        minioClient.presignedPutObject(minioBucket, path, 5*60, (err, url) => {
-            if (err){
-                setLoading(false);
-                return console.log(err);
-            }            
-            Axios.put(url,file)
-            .then(res => {
-                setLoading(false);
-                setData({
-                    ...data,
-                    [e.target.name]: path
-                })
-            })
-            .catch(err => {
-                setLoading(false);
-                console.log(err);
-            })
-        })
+        // minioClient.presignedPutObject(minioBucket, path, 5*60, (err, url) => {
+        //     if (err){
+        //         setLoading(false);
+        //         return console.log(err);
+        //     }            
+        //     Axios.put(url,file)
+        //     .then(res => {
+        //         setLoading(false);
+        //         setData({
+        //             ...data,
+        //             [e.target.name]: path
+        //         })
+        //     })
+        //     .catch(err => {
+        //         setLoading(false);
+        //         console.log(err);
+        //     })
+        // })
 
     }
 
@@ -730,6 +766,13 @@ function PatientForm(props) {
                             )
                         }
                         else if(field.field === "file"){
+                            console.log("data[field.name]");
+                            console.log(data[field.name]);
+                            if (data[field.name]!==null){
+                                console.log("entered loop");
+                                miniosetUrl(field.name, data[field.name]);
+                            };
+
                             return(
                                 <div className={classes.file} key={field.name}>
                                     <label style={{marginBottom:"0px",color:"#05056B"}} className="fileLabel">{field.name.replace(/_/g,' ').toUpperCase()}:</label>
@@ -740,6 +783,8 @@ function PatientForm(props) {
                                         onChange={e => {
                                             register(field.name, field.rules).onChange(e);
                                             uploadImage(e);
+                                            miniosetUrl(field.name, data[field.name]);
+                                            // miniosetUrl(e);
                                         }}
 
                                         disabled={disabled}
@@ -752,9 +797,12 @@ function PatientForm(props) {
                                     </Popup>
                                     </div> */}
                                     <label style={{marginBottom:"0px",color:"#05056B"}} className="fileLabel">{AIpredswitch(field.name)}</label>
+                                    {/* <img src={getUrl(field.name)} style={{height: "100px",width:"100px",border:"solid 2px",marginTop:"10px"}} alt="preview"  onClick={() => previewImage(getUrl(data[field.name]))} /> */}
                                     {
+                                        // field.name ? null :
                                         !data[field.name] ? null :
-                                            <img src={getUrl(data[field.name])} style={{height: "100px",width:"100px",border:"solid 2px",marginTop:"10px"}} alt="preview"  onClick={() => previewImage(getUrl(data[field.name]))} />
+                                            // <img src={getUrl(data[field.name])} style={{height: "100px",width:"100px",border:"solid 2px",marginTop:"10px"}} alt="preview"  onClick={() => previewImage(getUrl(data[field.name]))} />
+                                            <img src={imgSrcSwitch(field.name)} style={{height: "100px",width:"100px",border:"solid 2px",marginTop:"10px"}} alt="preview"  onClick={() => previewImage(getUrl(data[field.name]))} onLoad={() => miniosetUrl(field.name, data[field.name]) } />
                                     }
                                     {
                                         !errors[field.name] ? null :

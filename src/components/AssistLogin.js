@@ -73,6 +73,7 @@ sendotp = (e) => {
         this.configureCaptcha();
         const appVerifier = window.recaptchaVerifier;
         const mobile_with_code = `+91${this.props.values.phone}`
+        console.log("before sending otp");
         firebase.auth().signInWithPhoneNumber(mobile_with_code, appVerifier)
             .then((confirmationResult) => {
                 // SMS sent
@@ -83,12 +84,13 @@ sendotp = (e) => {
             })
             .catch(error => {
                 this.setState({loading:false})
+                console.log('failed in firebase auth');
                 alert("OTP not sent")
                 var step = this.state.counter_step
                 this.setState({counter_step: step + 1})
                 localStorage.setItem("assist_login_counter_step",parseInt(step))
-                this.setTimer()
-                this.startTimer()
+                // this.setTimer()
+                // this.startTimer()
                 if (error.response){
                     console.log(error.response.data);
                 }
