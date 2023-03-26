@@ -50,7 +50,7 @@ function Navbar() {
                 <img src={HealthcareIcon} className={classes.appLogo}/>
                 <Typography variant="h6" className={classes.appName}>IIITH-HCP</Typography>
                 <Typography variant="h6" className={classes.orgName}>{orgName}</Typography>
-                { orgLogo ? <img src={orgLogo} className={classes.orgLogo}/> : null }
+                {/* { orgLogo ? <img src={orgLogo} className={classes.orgLogo}/> : null } */}
             </Toolbar>            
         </AppBar>
     )
