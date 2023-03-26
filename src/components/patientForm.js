@@ -429,8 +429,6 @@ function PatientForm(props) {
         const setfieldurl = setImgSrcSwitch(blockfieldname);
 
         
-        console.log('entered get url');
-        console.log(path);
         if(!path) return;
         // var minio_object_url;
         
@@ -450,8 +448,6 @@ function PatientForm(props) {
     }
 
     const getUrl = (path) => {
-        console.log('entered get url');
-        console.log(path);
         if(!path) return;
         // var minio_object_url;
         
@@ -471,14 +467,19 @@ function PatientForm(props) {
         return minio_object_url;
     }
 
-    const uploadImage = async (e) => {
-        const setfieldpred = setAIpredswitch(e.target.name)
+    const uploadImage = async (e, varfeildname, vardataname) => {
+        if (e.target.files && e.target.files[0]) {
+
+        const setfieldpred = setAIpredswitch(e.target.name);
         const file = e.target.files[0]
+
+
         let formDataflask = new FormData();
   
         //Adding files to the formdata
         
         var fileExt = file.name.split('.').pop()
+
         var orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase()
         var driveName = localStorage.getItem("drive_selected_name").replace(/ /g, "_").toLowerCase()
         var fieldName = e.target.name.replace(/ /g, "_").toLowerCase()
@@ -489,7 +490,10 @@ function PatientForm(props) {
         formDataflask.append("name", "oral_cavity");
         formDataflask.append("path", path);
 
+
         setLoading(true);
+
+
         Axios({
             url: process.env.REACT_APP_FLASK_URL+"/upload",
             // url: "http://192.168.1.144:6500/upload",
@@ -503,8 +507,8 @@ function PatientForm(props) {
                 ...data,
                 [e.target.name]: path
             })
-            console.log(res.data);
             setfieldpred("AI prediction: "+res.data);
+            miniosetUrl(varfeildname, vardataname);
         }) // Handle the response from backend here
           .catch((err) => {
             setLoading(false);
@@ -529,6 +533,8 @@ function PatientForm(props) {
         //         console.log(err);
         //     })
         // })
+
+    }
 
     }
 
@@ -766,10 +772,7 @@ function PatientForm(props) {
                             )
                         }
                         else if(field.field === "file"){
-                            console.log("data[field.name]");
-                            console.log(data[field.name]);
                             if (data[field.name]!==null){
-                                console.log("entered loop");
                                 miniosetUrl(field.name, data[field.name]);
                             };
 
@@ -779,11 +782,12 @@ function PatientForm(props) {
                                     <input
                                         type="file"
                                         accept="image/*"
+                                        // capture="environment"
                                         {...register(field.name, field.rules)}
                                         onChange={e => {
                                             register(field.name, field.rules).onChange(e);
-                                            uploadImage(e);
-                                            miniosetUrl(field.name, data[field.name]);
+                                            uploadImage(e,field.name, data[field.name] );
+                                            // miniosetUrl(field.name, data[field.name]);
                                             // miniosetUrl(e);
                                         }}
 
