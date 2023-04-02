@@ -129,6 +129,7 @@ function PatientForm(props) {
     const [bottomimagesrc,bottomsetimgsrc] = React.useState('');
     const [othersimagesrc,otherssetimgsrc] = React.useState('');
     const [others2imagesrc,others2setimgsrc] = React.useState('');
+    const [biopsyimagesrc,biopsysetimgsrc] = React.useState('');
     const [selectCategory,setSelectCategory] = React.useState('');
     const [requirement,setRequirement] = React.useState('manual');
     const [FormFields,setFormFields] = React.useState({});
@@ -191,6 +192,7 @@ function PatientForm(props) {
           case "right":  return rightimagesrc;
           case "others":  return othersimagesrc;
           case "others2":  return others2imagesrc;
+          case "biopsyform":  return biopsyimagesrc;
     
           default: return ''
         }
@@ -205,6 +207,7 @@ function PatientForm(props) {
           case "right":  return rightsetimgsrc;
           case "others":  return otherssetimgsrc;
           case "others2":  return others2setimgsrc;
+          case "biopsyform":  return biopsysetimgsrc;
     
           default:      return otherssetAIpred
         }
@@ -427,7 +430,6 @@ function PatientForm(props) {
 
     const miniosetUrl = async (blockfieldname, path ) => {
         const setfieldurl = setImgSrcSwitch(blockfieldname);
-
         
         if(!path) return;
         // var minio_object_url;
@@ -477,7 +479,6 @@ function PatientForm(props) {
         let formDataflask = new FormData();
   
         //Adding files to the formdata
-        
         var fileExt = file.name.split('.').pop()
 
         var orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase()
@@ -507,7 +508,9 @@ function PatientForm(props) {
                 ...data,
                 [e.target.name]: path
             })
-            setfieldpred("AI prediction: "+res.data);
+            if (e.target.name!=="biopsyform"){
+                setfieldpred("AI prediction: "+res.data);
+            }
             miniosetUrl(varfeildname, vardataname);
         }) // Handle the response from backend here
           .catch((err) => {
