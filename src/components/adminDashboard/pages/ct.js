@@ -1,6 +1,6 @@
-import React , {Component} from 'react';
+import React, { Component } from 'react';
 import './dataForm.css';
-import { Button,TextField,Divider,Chip } from '@material-ui/core';
+import { Button, TextField, Divider, Chip } from '@material-ui/core';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 import AutorenewOutlinedIcon from '@material-ui/icons/AutorenewOutlined';
@@ -19,21 +19,21 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: 'auto',
-  },
-  cardHeader: {
-    padding: theme.spacing(1, 2),
-  },
-  list: {
-    width: 500,
-    height: 400,
-    backgroundColor: theme.palette.background.paper,
-    overflow: 'auto',
-  },
-  button: {
-    margin: theme.spacing(0.5, 0),
-  },
+    root: {
+        margin: 'auto',
+    },
+    cardHeader: {
+        padding: theme.spacing(1, 2),
+    },
+    list: {
+        width: 500,
+        height: 400,
+        backgroundColor: theme.palette.background.paper,
+        overflow: 'auto',
+    },
+    button: {
+        margin: theme.spacing(0.5, 0),
+    },
 }));
 
 function not(a, b) {
@@ -41,16 +41,16 @@ function not(a, b) {
 }
 
 function intersection(a, b) {
-  return a.filter((value) => b.indexOf(value) !== -1);
+    return a.filter((value) => b.indexOf(value) !== -1);
 }
 
 function union(a, b) {
-  return [...a, ...not(b, a)];
+    return [...a, ...not(b, a)];
 }
 
 function TransferList(props) {
-    let dd =[];
-    dd= props.props
+    let dd = [];
+    dd = props.props
     console.log(dd)
     const classes = useStyles();
     const [checked, setChecked] = React.useState([]);
@@ -116,12 +116,12 @@ function TransferList(props) {
                     return (
                         <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
                             <ListItemIcon>
-                            <Checkbox
-                                checked={checked.indexOf(value) !== -1}
-                                tabIndex={-1}
-                                disableRipple
-                                inputProps={{ 'aria-labelledby': labelId }}
-                            />
+                                <Checkbox
+                                    checked={checked.indexOf(value) !== -1}
+                                    tabIndex={-1}
+                                    disableRipple
+                                    inputProps={{ 'aria-labelledby': labelId }}
+                                />
                             </ListItemIcon>
                             <ListItemText id={value} primary={value} />
                         </ListItem>
@@ -142,94 +142,94 @@ function TransferList(props) {
         >
             <Grid item xs={5}>{customList('Choices', left)}</Grid>
             <Grid item>
-            <Grid container direction="column" alignItems="center">
-                <Button
-                    variant="outlined"
-                    size="small"
-                    className={classes.button}
-                    onClick={handleCheckedRight}
-                    disabled={leftChecked.length === 0}
-                    aria-label="move selected right"
-                >
-                &gt;
-                </Button>
-                <Button
-                    variant="outlined"
-                    size="small"
-                    className={classes.button}
-                    onClick={handleCheckedLeft}
-                    disabled={rightChecked.length === 0}
-                    aria-label="move selected left"
-                >
-                &lt;
-                </Button>
+                <Grid container direction="column" alignItems="center">
+                    <Button
+                        variant="outlined"
+                        size="small"
+                        className={classes.button}
+                        onClick={handleCheckedRight}
+                        disabled={leftChecked.length === 0}
+                        aria-label="move selected right"
+                    >
+                        &gt;
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        size="small"
+                        className={classes.button}
+                        onClick={handleCheckedLeft}
+                        disabled={rightChecked.length === 0}
+                        aria-label="move selected left"
+                    >
+                        &lt;
+                    </Button>
+                </Grid>
             </Grid>
-            </Grid>
-        <Grid item xs={5}>{customList('Chosen', right)}</Grid>
+            <Grid item xs={5}>{customList('Chosen', right)}</Grid>
         </Grid>
     );
 }
 
-class TAddDataForm extends Component{
-    constructor(props){
+class TAddDataForm extends Component {
+    constructor(props) {
         super(props);
-        this.state={
-            nodes:[],
-            nodes2:[],
-            checked:[],
-            expanded:[],
-            form_name:'',
-            description:'',
-            tree:[],
-            titles:[],
-            selected_fields:[],
-            load:"Loading..."
+        this.state = {
+            nodes: [],
+            nodes2: [],
+            checked: [],
+            expanded: [],
+            form_name: '',
+            description: '',
+            tree: [],
+            titles: [],
+            selected_fields: [],
+            load: "Loading..."
         }
         this.onCheck = this.onCheck.bind(this);
         this.onExpand = this.onExpand.bind(this);
-        this.discard_form=this.discard_form.bind(this)
-        this.preview_form=this.preview_form.bind(this)
-        this.create_form=this.create_form.bind(this)
-        this.handleChange=this.handleChange.bind(this)
+        this.discard_form = this.discard_form.bind(this)
+        this.preview_form = this.preview_form.bind(this)
+        this.create_form = this.create_form.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
-    handleChange = (name,val) => {
-        if(name==="form_name")this.setState({form_name: val})
-        else this.setState({description: val})
+    handleChange = (name, val) => {
+        if (name === "form_name") this.setState({ form_name: val })
+        else this.setState({ description: val })
     };
-    discard_form=()=>{
-        window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/dataforms`;
+    discard_form = () => {
+        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/dataforms`;
     }
-    create_form=()=>{
+    create_form = () => {
         alert("add bk :{")
     }
-    preview_form=()=>{
+    preview_form = () => {
 
     }
     onCheck(checked) {
-        this.setState({ checked:checked });
+        this.setState({ checked: checked });
     }
     onExpand(expanded) {
-        this.setState({ expanded:expanded });
+        this.setState({ expanded: expanded });
     }
-    componentDidMount(){
-        let nodes=[];
-        let nodes2=[];
-        for(let x in TreeData){
-            let c={
-                value:"",
-                label:"",
+    componentDidMount() {
+        let nodes = [];
+        let nodes2 = [];
+        for (let x in TreeData) {
+            let c = {
+                value: "",
+                label: "",
             }
-            c.value=x
-            c.label=x
+            c.value = x
+            c.label = x
             nodes.push(c)
             nodes2.push(x)
         }
-        this.setState({nodes:nodes})
-        this.setState({nodes2:nodes2})
+        this.setState({ nodes: nodes })
+        this.setState({ nodes2: nodes2 })
         console.log(nodes)
-        this.setState({load:''})
+        this.setState({ load: '' })
     }
-    render(){
+    render() {
         return (
             <>
                 <div className="dataform">
@@ -238,16 +238,16 @@ class TAddDataForm extends Component{
                             <div className="df-subtitle">Form Essentials</div>
                             <div className="df-description" >Fill the listed fields which will help you to identify this form later</div>
                             <div className="df-form-ess">
-                                <TextField id="outlined-basic" name="form_name" onChange={(e) => this.handleChange("form_name",e.target.value)}  label="Form Name" variant="outlined" /><br/>
-                                <TextField id="outlined-basic-large" name="description" onChange={(e) => this.handleChange("description",e.target.value)} label="Description" variant="outlined"/>
+                                <TextField id="outlined-basic" name="form_name" onChange={(e) => this.handleChange("form_name", e.target.value)} label="Form Name" variant="outlined" /><br />
+                                <TextField id="outlined-basic-large" name="description" onChange={(e) => this.handleChange("description", e.target.value)} label="Description" variant="outlined" />
                                 <div className="df-create2"><Button variant="contained" onClick={this.create_form} color="primary" startIcon={<CreateOutlinedIcon />}> Create </Button></div>
                                 <div className="df-create2"><Button variant="contained" onClick={this.discard_form} color="secondary" startIcon={<ClearOutlinedIcon />}> Discard </Button></div>
                             </div>
                             <div className="df-subtitle">Add fields</div>
                             <div className="df-description" >choose the listed fields which will be the part of form created</div>
-                                {
-                                    this.state.load==="Loading..." ? <CircularProgress/> : <TransferList props={this.state.nodes2}/>
-                                }
+                            {
+                                this.state.load === "Loading..." ? <CircularProgress /> : <TransferList props={this.state.nodes2} />
+                            }
                         </div>
 
                     </div>
@@ -255,8 +255,8 @@ class TAddDataForm extends Component{
                     <div className="df-footer" ></div>
                 </div>
             </>
-            );
-        }
+        );
+    }
 }
 
 export default TAddDataForm;

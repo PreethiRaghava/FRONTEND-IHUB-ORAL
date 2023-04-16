@@ -103,20 +103,20 @@ export default function AdminStaff(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const homezz = () =>{
-    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/staff`;
+  const homezz = () => {
+    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/staff`;
   }
-  const drivezz = () =>{
-    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/drives`;
+  const drivezz = () => {
+    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/drives`;
   }
-  const adddrivezz = () =>{
-    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/adddrive`;
+  const adddrivezz = () => {
+    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/adddrive`;
   }
-  const dataformzz = () =>{
-    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/dataforms`;
+  const dataformzz = () => {
+    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/dataforms`;
   }
-  const adddataformzz = () =>{
-    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/createdataform`;
+  const adddataformzz = () => {
+    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/createdataform`;
   }
   const logoutme = () => {
     Axios({
@@ -124,20 +124,20 @@ export default function AdminStaff(props) {
       url: "/admin/logout",
       withCredentials: true
     })
-    .then(res => {
-      console.log(`response is: ${res.data}`);
-      console.log(`status is :${res.status}`);
-      localStorage.removeItem("app_drive_id");
-      localStorage.removeItem("iiith-hcp-org_name");
-      localStorage.removeItem("iiith-hcp-org_logo");
-      localStorage.removeItem("iiith-hcp-user_login");
-      window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
-    })
-    .catch(error => {
-      if (error.response){
-        console.log(error.response.data);
-      }
-    });
+      .then(res => {
+        console.log(`response is: ${res.data}`);
+        console.log(`status is :${res.status}`);
+        localStorage.removeItem("app_drive_id");
+        localStorage.removeItem("iiith-hcp-org_name");
+        localStorage.removeItem("iiith-hcp-org_logo");
+        localStorage.removeItem("iiith-hcp-user_login");
+        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log(error.response.data);
+        }
+      });
   }
 
   return (
@@ -149,7 +149,7 @@ export default function AdminStaff(props) {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar style={{backgroundColor:"#B0F3F2"}}>
+        <Toolbar style={{ backgroundColor: "#B0F3F2" }}>
           <IconButton
             color="primary"
             aria-label="open drawer"
@@ -159,20 +159,20 @@ export default function AdminStaff(props) {
               [classes.hide]: open,
             })}
           >
-            <MenuIcon fontSize="large"/>
+            <MenuIcon fontSize="large" />
           </IconButton>
-          <div style={{paddingTop:"0.5%",paddingBottom:"0.5%",width:"100%"}}>
-            <Grid container  spacing={2}>
+          <div style={{ paddingTop: "0.5%", paddingBottom: "0.5%", width: "100%" }}>
+            <Grid container spacing={2}>
               <Grid item xs={8}>
-                <Typography align="left" variant="h5" noWrap style={{color:"#05056B"}}>
-                <img style={{width:"50px",height:"50px",marginRight:"1%"}} src={HealthcareIcon}/>
+                <Typography align="left" variant="h5" noWrap style={{ color: "#05056B" }}>
+                  <img style={{ width: "50px", height: "50px", marginRight: "1%" }} src={HealthcareIcon} />
                   <b>IIITH-HCP</b>
                 </Typography>
               </Grid>
               <Grid item xs={4}>
-                <Typography align="right" variant="h5" noWrap style={{color:"#05056B"}}>
+                <Typography align="right" variant="h5" noWrap style={{ color: "#05056B" }}>
                   <b>{org_name}</b>
-                <img style={{width:"50px",height:"50px",marginLeft:"1%",alignContent:"right"}} src={org_logo}/>
+                  <img style={{ width: "50px", height: "50px", marginLeft: "1%", alignContent: "right" }} src={org_logo} />
                 </Typography>
               </Grid>
             </Grid>
@@ -200,34 +200,34 @@ export default function AdminStaff(props) {
         <Divider />
         <Divider />
         <List>
-            <ListItem button key={"Drives"} onClick={drivezz}>
-              <ListItemIcon> <RoomIcon /></ListItemIcon>
-              <ListItemText primary={"Drives"} />
-            </ListItem>
-            <Divider/>
-            <ListItem button key={"Dataforms"} onClick={dataformzz}>
-              <ListItemIcon> <DescriptionOutlinedIcon /></ListItemIcon>
-              <ListItemText primary={"Dataforms"} />
-            </ListItem>
-            <Divider/>
-            <ListItem button key={"Staff"} onClick={homezz}>
-              <ListItemIcon> <GroupIcon /></ListItemIcon>
-              <ListItemText primary={"Staff"} />
-            </ListItem>
+          <ListItem button key={"Drives"} onClick={drivezz}>
+            <ListItemIcon> <RoomIcon /></ListItemIcon>
+            <ListItemText primary={"Drives"} />
+          </ListItem>
+          <Divider />
+          <ListItem button key={"Dataforms"} onClick={dataformzz}>
+            <ListItemIcon> <DescriptionOutlinedIcon /></ListItemIcon>
+            <ListItemText primary={"Dataforms"} />
+          </ListItem>
+          <Divider />
+          <ListItem button key={"Staff"} onClick={homezz}>
+            <ListItemIcon> <GroupIcon /></ListItemIcon>
+            <ListItemText primary={"Staff"} />
+          </ListItem>
         </List>
         <Divider />
         <Divider />
         <List>
-            <ListItem button key={"Logout"} onClick={logoutme}>
-              <ListItemIcon > <ExitToAppIcon /></ListItemIcon>
-              <ListItemText primary={"Logout"} />
-            </ListItem>
+          <ListItem button key={"Logout"} onClick={logoutme}>
+            <ListItemIcon > <ExitToAppIcon /></ListItemIcon>
+            <ListItemText primary={"Logout"} />
+          </ListItem>
         </List>
         <Divider />
         <Divider />
         <Divider />
         <List>
-              {/* {
+          {/* {
                 open ?
                 <div style={{width:"100%",paddingLeft:"20%",paddingBottom:"-10%"}}>
                 <Typography align="center" padding="null" variant="caption">
@@ -236,16 +236,16 @@ export default function AdminStaff(props) {
                 </div>:null
 
               } */}
-            <ListItem>
-              <ListItemIcon > <AccountCircleIcon /></ListItemIcon>
-              <ListItemText primary={user_login} />
-            </ListItem>
+          <ListItem>
+            <ListItemIcon > <AccountCircleIcon /></ListItemIcon>
+            <ListItemText primary={user_login} />
+          </ListItem>
         </List>
 
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Staff/>
+        <Staff />
       </main>
     </div>
   );

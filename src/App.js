@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './components/landingPage';
 import RegisterForm from './components/register_form'
 import LoginForm from './components/login_form';
@@ -19,35 +19,27 @@ import AdminAddDataForm from './components/adminDashboard/pages/adminAddDataForm
 import AdminReplaceDataForm from './components/adminDashboard/pages/adminReplace';
 
 function App() {
-  console.log('started the app');
-  console.log(process.env.REACT_APP_FLASK_URL);
-  console.log(process.env.REACT_APP_FLASK_PORT);
-  console.log(process.env.REACT_APP_SERVER_IP);
-  console.log(process.env.REACT_APP_PROXY_DEV);
-  console.log(process.env.REACT_APP_PROXY_DEPLOY);
-  console.log('ended the app');
 
   return (
-    <Router basename={process.env.REACT_APP_URL_PREFIX}>
-    {/* <Router> */}
+    <Router basename={process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}>
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path="/login" component={LoginForm} />
-        <Route path="/enrollReg" render={props => <EnrollReg {...props}/>} />
+        <Route path="/enrollReg" render={props => <EnrollReg {...props} />} />
         <Route path="/register" component={RegisterForm} />
         <Route path="/admin" component={AdminLoginForm} />
         <Route path="/enroll" exact component={EnrollLogin} />
         <Route path="/patientsall" component={PatientsAll} />
         <Route path="/stationform" component={StationForm} />
-        <Route path="/patient" exact render={props => <Patient {...props}/>} />
-        <Route path="/admindashboard/staff" component={AdminStaff}/>
-        <Route path="/admindashboard/addassistant" component={AdminAddStaff}/>
-        <Route path="/admindashboard/drives" component={AdminDrive}/>
-        <Route path="/admindashboard/adddrive" component={AdminAddDrive}/>
-        <Route path="/admindashboard/driveinfo" component={AdminDriveInfo}/>
-        <Route path="/admindashboard/dataforms" component={AdminDataForm}/>
-        <Route path="/admindashboard/replacedatafroms" component={AdminReplaceDataForm}/>
-        <Route path="/admindashboard/createdataform" component={AdminAddDataForm}/>
+        <Route path="/patient" exact render={props => <Patient {...props} />} />
+        <Route path="/admindashboard/staff" component={AdminStaff} />
+        <Route path="/admindashboard/addassistant" component={AdminAddStaff} />
+        <Route path="/admindashboard/drives" component={AdminDrive} />
+        <Route path="/admindashboard/adddrive" component={AdminAddDrive} />
+        <Route path="/admindashboard/driveinfo" component={AdminDriveInfo} />
+        <Route path="/admindashboard/dataforms" component={AdminDataForm} />
+        <Route path="/admindashboard/replacedatafroms" component={AdminReplaceDataForm} />
+        <Route path="/admindashboard/createdataform" component={AdminAddDataForm} />
       </Switch>
     </Router>
 

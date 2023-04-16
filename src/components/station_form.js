@@ -68,7 +68,7 @@ class StationForm extends Component {
 
     exit = () => {
         this.setState({ loading: true });
-        window.location = `${process.env.REACT_APP_URL_PREFIX}/enrollReg`;
+        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/enrollReg`;
     }
 
     handleInputType = e => {
@@ -76,11 +76,11 @@ class StationForm extends Component {
     }
 
     handleInput = e => {
-        this.setState({ input: e.target.value})
+        this.setState({ input: e.target.value })
     }
 
     patientSearch = () => {
-        if(this.state.input.length !== 10 && this.state.input.length !== 12){
+        if (this.state.input.length !== 10 && this.state.input.length !== 12) {
             alert("Enter a 12 digit Patient ID or a 10 digit mobile number");
             return;
         }
@@ -93,7 +93,7 @@ class StationForm extends Component {
             selectedPatientId: ''
         })
 
-        if (this.state.input.length===12) {
+        if (this.state.input.length === 12) {
             Axios({
                 method: "POST",
                 url: "/patient/check",
@@ -124,7 +124,7 @@ class StationForm extends Component {
                     }
                 });
         }
-        else if (this.state.input.length===10) {
+        else if (this.state.input.length === 10) {
             //AXIOS CALL ON SAME MOBILE IN DRIVE
             Axios({
                 method: "POST",
@@ -143,7 +143,7 @@ class StationForm extends Component {
                             patientList: res.data.data,
                             patientListBackup: res.data.data,
                             patientFound: true,
-                            modal_open:true
+                            modal_open: true
                         })
                     }
                     else {
@@ -190,7 +190,7 @@ class StationForm extends Component {
     }
 
     viewAllPatients = () => {
-        this.setState({ loading: true, modal_open: true})
+        this.setState({ loading: true, modal_open: true })
         Axios({
             method: "POST",
             url: "/drive/getpatients",
@@ -228,8 +228,8 @@ class StationForm extends Component {
     }
 
     fuzzysearch = e => {
-        if(!e.target.value.trim()){
-            this.setState({patientList: this.state.patientListBackup});
+        if (!e.target.value.trim()) {
+            this.setState({ patientList: this.state.patientListBackup });
             return;
         }
 
@@ -261,7 +261,7 @@ class StationForm extends Component {
 
     }
     titleCase = str => {
-        return str.toLowerCase().split(' ').map(function(val) { return val.replace(val[0], val[0].toUpperCase()); }).join(' ');
+        return str.toLowerCase().split(' ').map(function (val) { return val.replace(val[0], val[0].toUpperCase()); }).join(' ');
     }
 
     render() {
@@ -273,7 +273,7 @@ class StationForm extends Component {
                     <button style={{ border: "none", background: "none", marginRight: "auto" }} onClick={this.exit}>
                         <img className="backArrow" src={BackArrow} />
                     </button>
-                    <label style={{ marginRight: "auto", fontWeight: "600", fontSize: "20px" }} className="formHeaders">Category: {this.titleCase(this.state.selectCategory.replace(/_/g,' '))}</label>
+                    <label style={{ marginRight: "auto", fontWeight: "600", fontSize: "20px" }} className="formHeaders">Category: {this.titleCase(this.state.selectCategory.replace(/_/g, ' '))}</label>
                 </div>
                 <Container maxWidth="sm">
                     <Grid container spacing={1} alignItems="center">
@@ -328,7 +328,7 @@ class StationForm extends Component {
 
                     <Modal
                         open={this.state.modal_open}
-                        onClose={() => this.setState({modal_open: false})}
+                        onClose={() => this.setState({ modal_open: false })}
                     >
                         <div id="viewAllPatients">
                             <div id="modal-div-in">
@@ -338,33 +338,33 @@ class StationForm extends Component {
                                             <>
                                                 {
                                                     this.state.patientFound &&
-                                                        <>
-                                                            <TextField fullWidth variant="outlined" className="op-wh" onChange={this.fuzzysearch} label="Search by Patient Name, ID or Mobile" ></TextField>
-                                                            <br />
-                                                            <br />
-                                                            {
-                                                                this.state.patientList.map(user => (
-                                                                    <fieldset key={user.patient_id} className="accountCard">
-                                                                        <Form style={{ lineHeight: "30px", paddingTop: "10px" }} className="accountForm">
-                                                                            <Row>
-                                                                                <Col className="formHeaders" xs={6}>{user.first_name} {user.last_name}</Col>
-                                                                                <Col className="formValues" xs={6}>
-                                                                                    <button className="accountButton" onClick={e => this.selectPatient(user)}>Start</button>
-                                                                                </Col>
-                                                                            </Row>
-                                                                            <Row>
-                                                                                <Col className="formHeaders" xs={6}>Patient ID</Col>
-                                                                                <Col className="formValues" xs={6}>{user.patient_id}</Col>
-                                                                            </Row>
-                                                                            <Row>
-                                                                                <Col className="formHeaders" xs={6}>Mobile Number:</Col>
-                                                                                <Col className="formValues"  xs={6}>{user.mobile_number}</Col>
-                                                                            </Row>
-                                                                        </Form>
-                                                                    </fieldset>
-                                                                ))
-                                                            }
-                                                        </>
+                                                    <>
+                                                        <TextField fullWidth variant="outlined" className="op-wh" onChange={this.fuzzysearch} label="Search by Patient Name, ID or Mobile" ></TextField>
+                                                        <br />
+                                                        <br />
+                                                        {
+                                                            this.state.patientList.map(user => (
+                                                                <fieldset key={user.patient_id} className="accountCard">
+                                                                    <Form style={{ lineHeight: "30px", paddingTop: "10px" }} className="accountForm">
+                                                                        <Row>
+                                                                            <Col className="formHeaders" xs={6}>{user.first_name} {user.last_name}</Col>
+                                                                            <Col className="formValues" xs={6}>
+                                                                                <button className="accountButton" onClick={e => this.selectPatient(user)}>Start</button>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        <Row>
+                                                                            <Col className="formHeaders" xs={6}>Patient ID</Col>
+                                                                            <Col className="formValues" xs={6}>{user.patient_id}</Col>
+                                                                        </Row>
+                                                                        <Row>
+                                                                            <Col className="formHeaders" xs={6}>Mobile Number:</Col>
+                                                                            <Col className="formValues" xs={6}>{user.mobile_number}</Col>
+                                                                        </Row>
+                                                                    </Form>
+                                                                </fieldset>
+                                                            ))
+                                                        }
+                                                    </>
                                                 }
                                             </>
                                     }
@@ -376,14 +376,14 @@ class StationForm extends Component {
                     {
                         !this.state.modal_open && this.state.showVisitList &&
                         <>
-                            <div style={{ marginTop:"20px", borderRadius: "15px", border: "2px solid black", width: "100%", padding: "2%", backgroundColor: "white", overflow: "auto" }}>
+                            <div style={{ marginTop: "20px", borderRadius: "15px", border: "2px solid black", width: "100%", padding: "2%", backgroundColor: "white", overflow: "auto" }}>
                                 {
                                     !this.state.showForm ?
                                         <h6 style={{ marginTop: "5px" }}>Select visit to proceed further</h6>
-                                    :
-                                    <PatientForm
-                                        values={this.state.patientFormValueProp}
-                                    />
+                                        :
+                                        <PatientForm
+                                            values={this.state.patientFormValueProp}
+                                        />
                                 }
                             </div>
                             <br />

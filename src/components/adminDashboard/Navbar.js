@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AdminNavbar(props) {
-  let mode= props.mode
+  let mode = props.mode
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [home, setHome] = React.useState(false);
@@ -107,7 +107,7 @@ export default function AdminNavbar(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const homezz = () =>{
+  const homezz = () => {
     setHome(true);
     setDrive(false);
     setAddDrive(false);
@@ -115,7 +115,7 @@ export default function AdminNavbar(props) {
     setAddDataform(false);
     setOpen(false);
   }
-  const drivezz = () =>{
+  const drivezz = () => {
     setHome(false);
     setDrive(true);
     setAddDrive(false);
@@ -123,7 +123,7 @@ export default function AdminNavbar(props) {
     setAddDataform(false);
     setOpen(false);
   }
-  const adddrivezz = () =>{
+  const adddrivezz = () => {
     setHome(false);
     setDrive(false);
     setAddDrive(true);
@@ -131,7 +131,7 @@ export default function AdminNavbar(props) {
     setAddDataform(false);
     setOpen(false);
   }
-  const dataformzz = () =>{
+  const dataformzz = () => {
     setHome(false);
     setDrive(false);
     setAddDrive(false);
@@ -139,7 +139,7 @@ export default function AdminNavbar(props) {
     setAddDataform(false);
     setOpen(false);
   }
-  const adddataformzz = () =>{
+  const adddataformzz = () => {
     setHome(false);
     setDrive(false);
     setAddDrive(false);
@@ -153,20 +153,20 @@ export default function AdminNavbar(props) {
       url: "/admin/logout",
       withCredentials: true
     })
-    .then(res => {
-      console.log(`response is: ${res.data}`);
-      console.log(`status is :${res.status}`);
-      localStorage.removeItem("app_drive_id");
-      localStorage.removeItem("iiith-hcp-org_name");
-      localStorage.removeItem("iiith-hcp-org_logo");
-      localStorage.removeItem("iiith-hcp-user_login");
-      window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
-    })
-    .catch(error => {
-      if (error.response){
-        console.log(error.response.data);
-      }
-    });
+      .then(res => {
+        console.log(`response is: ${res.data}`);
+        console.log(`status is :${res.status}`);
+        localStorage.removeItem("app_drive_id");
+        localStorage.removeItem("iiith-hcp-org_name");
+        localStorage.removeItem("iiith-hcp-org_logo");
+        localStorage.removeItem("iiith-hcp-user_login");
+        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log(error.response.data);
+        }
+      });
   }
   console.log(mode)
   // if(mode==="drive"){drivezz();}
@@ -185,7 +185,7 @@ export default function AdminNavbar(props) {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar style={{backgroundColor:"#0c1545"}}>
+        <Toolbar style={{ backgroundColor: "#0c1545" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -223,41 +223,41 @@ export default function AdminNavbar(props) {
         <Divider />
         <Divider />
         <List>
-            <ListItem button key={"Home"} onClick={homezz}>
-              <ListItemIcon> <PersonIcon /></ListItemIcon>
-              <ListItemText primary={"Home"} />
-            </ListItem>
-            <Divider/>
-            <ListItem button key={"Drives"} onClick={drivezz}>
-              <ListItemIcon> <RoomIcon /></ListItemIcon>
-              <ListItemText primary={"Drives"} />
-            </ListItem>
-            <ListItem button key={"Add Drive"} onClick={adddrivezz}>
-              <ListItemIcon> <PlaylistAddOutlinedIcon /></ListItemIcon>
-              <ListItemText primary={"Add Drive"} />
-            </ListItem>
-            <Divider/>
-            <ListItem button key={"Dataforms"} onClick={dataformzz}>
-              <ListItemIcon> <DescriptionOutlinedIcon /></ListItemIcon>
-              <ListItemText primary={"Dataforms"} />
-            </ListItem>
-            <ListItem button key={"Create Dataform"} onClick={adddataformzz}>
-              <ListItemIcon> <NoteAddOutlinedIcon /></ListItemIcon>
-              <ListItemText primary={"Create Dataform"} />
-            </ListItem>
+          <ListItem button key={"Home"} onClick={homezz}>
+            <ListItemIcon> <PersonIcon /></ListItemIcon>
+            <ListItemText primary={"Home"} />
+          </ListItem>
+          <Divider />
+          <ListItem button key={"Drives"} onClick={drivezz}>
+            <ListItemIcon> <RoomIcon /></ListItemIcon>
+            <ListItemText primary={"Drives"} />
+          </ListItem>
+          <ListItem button key={"Add Drive"} onClick={adddrivezz}>
+            <ListItemIcon> <PlaylistAddOutlinedIcon /></ListItemIcon>
+            <ListItemText primary={"Add Drive"} />
+          </ListItem>
+          <Divider />
+          <ListItem button key={"Dataforms"} onClick={dataformzz}>
+            <ListItemIcon> <DescriptionOutlinedIcon /></ListItemIcon>
+            <ListItemText primary={"Dataforms"} />
+          </ListItem>
+          <ListItem button key={"Create Dataform"} onClick={adddataformzz}>
+            <ListItemIcon> <NoteAddOutlinedIcon /></ListItemIcon>
+            <ListItemText primary={"Create Dataform"} />
+          </ListItem>
         </List>
         <Divider />
         <List>
-            <ListItem button key={"Logout"} onClick={logoutme}>
-              <ListItemIcon > <ExitToAppIcon /></ListItemIcon>
-              <ListItemText primary={"Logout"} />
-            </ListItem>
+          <ListItem button key={"Logout"} onClick={logoutme}>
+            <ListItemIcon > <ExitToAppIcon /></ListItemIcon>
+            <ListItemText primary={"Logout"} />
+          </ListItem>
         </List>
 
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {home === true ?  <Home/>: drive === true ? <Drive /> : adddrive ===true ? <AddDrive/>:dataform === true ? <DataForm /> : adddataform === true ? <AddDataForm/> : null}
+        {home === true ? <Home /> : drive === true ? <Drive /> : adddrive === true ? <AddDrive /> : dataform === true ? <DataForm /> : adddataform === true ? <AddDataForm /> : null}
       </main>
     </div>
   );

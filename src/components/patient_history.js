@@ -4,16 +4,17 @@ import BackArrow from './icons/backArrow.png';
 //import FormFields from './jsonFiles/medicalHistory.json';
 import Navbar from './navbar';
 import Axios from 'axios';
-import { FormLabel,FormControl,FormGroup,FormControlLabel,FormHelperText,Checkbox,
-        TextField,OutlinedInput,
-        Select,InputLabel,MenuItem,
-        RadioGroup,Radio,
-        Backdrop,CircularProgress
-        } from '@material-ui/core';
+import {
+    FormLabel, FormControl, FormGroup, FormControlLabel, FormHelperText, Checkbox,
+    TextField, OutlinedInput,
+    Select, InputLabel, MenuItem,
+    RadioGroup, Radio,
+    Backdrop, CircularProgress
+} from '@material-ui/core';
 import * as FiIcons from 'react-icons/fi';
 import { withStyles } from "@material-ui/core/styles";
-import {useForm, Controller} from 'react-hook-form';
-import {minioClient, minioBucket} from './minio';
+import { useForm, Controller } from 'react-hook-form';
+import { minioClient, minioBucket } from './minio';
 
 const styles = theme => ({
     backdrop: {
@@ -24,9 +25,9 @@ const styles = theme => ({
         display: 'flex',
     },
     dropdown: {
-        marginTop:"20px",
+        marginTop: "20px",
         width: "250px",
-        "& .MuiInputLabel-outlined.MuiInputLabel-shrink":{
+        "& .MuiInputLabel-outlined.MuiInputLabel-shrink": {
             color: "#05056B !important"
         }
     },
@@ -45,16 +46,16 @@ const styles = theme => ({
     },
     checkboxLegend: {
         color: "#05056B !important",
-        fontWeight:"600",
-        fontSize:"small",
+        fontWeight: "600",
+        fontSize: "small",
         backgroundColor: "#10DDCD",
-        width:"100%",
-        minHeight:"25px",
+        width: "100%",
+        minHeight: "25px",
         display: "flex",
         alignIitems: "center",
         justifyContent: "center",
-	    padding: "2%",
-	    textAlign: "left"
+        padding: "2%",
+        textAlign: "left"
     },
     checkboxLabel: {
         color: "#05056B",
@@ -77,25 +78,25 @@ const styles = theme => ({
         marginTop: theme.spacing(2),
         fontSize: "90%",
         display: "flex",
-        flexDirection:"column",
-        alignItems:"center"
+        flexDirection: "column",
+        alignItems: "center"
     }
 })
 
 class PatientHistoryHook extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             disabled: true,
             loading: false,
             FormFields: {},
             patientMedData: {},
-            userInfo : props.values.userInfo
+            userInfo: props.values.userInfo
         }
     }
 
     componentDidMount() {
-        this.setState({loading:true})
+        this.setState({ loading: true })
         this.getPatientInfo();
 
         Axios({
@@ -103,100 +104,100 @@ class PatientHistoryHook extends Component {
             url: "/access/rendermedhistory",
             withCredentials: true
         })
-        .then(res => {
-            this.setState({FormFields: res.data.data})
-            Axios({
-                method: "POST",
-                url: "/patient/gethistory",
-                data: {
-                    patient: this.props.values.selectedPatientId,
-                },
-                withCredentials: true
-            })
             .then(res => {
-                this.setState({loading:false})
-                if(res.data.data){
-                    this.initialiseFormHookData(this.state.FormFields,res.data.data)
-                    this.setState({patientMedData: res.data.data})
-                }
-                else {
-                    let initialState = {}
-                    this.state.FormFields["medical_history"].parameters.map(field => {
-                        if(field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file"){
-                            initialState[field.name] = ""
+                this.setState({ FormFields: res.data.data })
+                Axios({
+                    method: "POST",
+                    url: "/patient/gethistory",
+                    data: {
+                        patient: this.props.values.selectedPatientId,
+                    },
+                    withCredentials: true
+                })
+                    .then(res => {
+                        this.setState({ loading: false })
+                        if (res.data.data) {
+                            this.initialiseFormHookData(this.state.FormFields, res.data.data)
+                            this.setState({ patientMedData: res.data.data })
                         }
-                        else if(field.field === "checkbox"){
-                            const checkInitial = {}
-                            field.values.map(opt => {
-                                checkInitial[opt] =  false
+                        else {
+                            let initialState = {}
+                            this.state.FormFields["medical_history"].parameters.map(field => {
+                                if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file") {
+                                    initialState[field.name] = ""
+                                }
+                                else if (field.field === "checkbox") {
+                                    const checkInitial = {}
+                                    field.values.map(opt => {
+                                        checkInitial[opt] = false
+                                    })
+                                    initialState[field.name] = checkInitial
+                                }
                             })
-                            initialState[field.name] = checkInitial
+                            this.setState({
+                                patientMedData: initialState,
+                                disabled: false
+                            })
                         }
                     })
-                    this.setState({
-                        patientMedData: initialState,
-                        disabled: false
-                    })
-                }
+                    .catch(error => {
+                        this.setState({ loading: false })
+                        if (error.response) {
+                            console.log(error.response.data.msg);
+                        }
+                    });
             })
             .catch(error => {
-                this.setState({loading:false})
-                if (error.response){
+                this.setState({ loading: false })
+                if (error.response) {
                     console.log(error.response.data.msg);
                 }
             });
-        })
-        .catch(error => {
-            this.setState({loading:false})
-            if (error.response){
-                console.log(error.response.data.msg);
-            }
-        });
 
     }
 
-    initialiseFormHookData = (FormFields,initialState) => {
+    initialiseFormHookData = (FormFields, initialState) => {
         FormFields["medical_history"].parameters.map(field => {
-            if(field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file"){
+            if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file") {
                 this.props.setValue(field.name, initialState[field.name])
             }
         })
     }
 
     next = () => {
-        this.setState({loading:true})
-        if(this.state.userInfo.admin ){
+        this.setState({ loading: true })
+        if (this.state.userInfo.admin) {
             window.location.reload()
         }
-        else{
+        else {
             this.props.nextStep();
         }
 
     }
 
     conditionalBack = () => {
-        if(this.state.userInfo.admin ){
+        if (this.state.userInfo.admin) {
             window.location.reload()
         }
-        else{
-            this.setState({loading:true})
-            if(this.props.values.mobile_number){
+        else {
+            this.setState({ loading: true })
+            if (this.props.values.mobile_number) {
                 this.props.prevStep()
             }
             else {
-                window.location = `${process.env.REACT_APP_URL_PREFIX}/enroll`;
+                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/enroll`;
             }
         }
     }
 
     exit = e => {
-        this.setState({loading:true});
-        window.location = `${process.env.REACT_APP_URL_PREFIX}/enroll`;
+        this.setState({ loading: true });
+        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/enroll`;
 
     }
 
     getPatientInfo() {
-        if(!this.props.values.selectedPatientId) return;
+        if (!this.props.values.selectedPatientId) return;
         Axios({
             method: "POST",
             url: "/patient/getpatient",
@@ -205,19 +206,19 @@ class PatientHistoryHook extends Component {
             },
             withCredentials: true
         })
-        .then(res => {
-            // console.log(res.data.data);
-            this.props.handleUserInfo(res.data.data);
-            //this.props.handleMobileNumber(res.data.data.mobile_number);
-        })
-        .catch(error => {
-            if (error.response){
-                console.log(error.response.data.msg);
-            }
-        });
+            .then(res => {
+                // console.log(res.data.data);
+                this.props.handleUserInfo(res.data.data);
+                //this.props.handleMobileNumber(res.data.data.mobile_number);
+            })
+            .catch(error => {
+                if (error.response) {
+                    console.log(error.response.data.msg);
+                }
+            });
     }
 
-    handleChange = (name,value) => {
+    handleChange = (name, value) => {
         this.setState({
             patientMedData: {
                 ...this.state.patientMedData,
@@ -226,7 +227,7 @@ class PatientHistoryHook extends Component {
         })
     }
 
-    handleCheckboxChange = (e,name,option) => {
+    handleCheckboxChange = (e, name, option) => {
         this.setState({
             patientMedData: {
                 ...this.state.patientMedData,
@@ -239,11 +240,11 @@ class PatientHistoryHook extends Component {
     }
 
     handleEdit = e => {
-        this.setState({disabled:false})
+        this.setState({ disabled: false })
     }
 
     submitHistory = e => {
-        this.setState({loading:true})
+        this.setState({ loading: true })
         Axios({
             method: "POST",
             url: "/patient/addhistory",
@@ -253,30 +254,30 @@ class PatientHistoryHook extends Component {
             },
             withCredentials: true
         })
-        .then(res => {
-            // console.log(res.data.data);
-            this.setState({loading:false})
-            this.props.reset()
-            if(this.state.userInfo.admin){
-                alert("History Submitted");
-            }
-            this.next();
-        })
-        .catch(error => {
-            alert("Submission failed. Try again")
-            this.setState({loading:false})
-            console.log(error);
-        });
+            .then(res => {
+                // console.log(res.data.data);
+                this.setState({ loading: false })
+                this.props.reset()
+                if (this.state.userInfo.admin) {
+                    alert("History Submitted");
+                }
+                this.next();
+            })
+            .catch(error => {
+                alert("Submission failed. Try again")
+                this.setState({ loading: false })
+                console.log(error);
+            });
     }
 
     getUrl = path => {
-        if(!path) return;
+        if (!path) return;
         var url;
-        minioClient.presignedUrl('GET', minioBucket, path, 1*60*60, function(err, presignedUrl) {
+        minioClient.presignedUrl('GET', minioBucket, path, 1 * 60 * 60, function (err, presignedUrl) {
             if (err) return console.log(err)
             // console.log(presignedUrl)
             url = presignedUrl
-          })
+        })
         return url;
     }
 
@@ -289,26 +290,26 @@ class PatientHistoryHook extends Component {
         var filename = `${this.props.values.selectedPatientId}_${fieldName}.${fileExt}`
         var path = `patient_history/${orgName}/${driveName}/${filename}`
 
-        this.setState({loading:true})
-        minioClient.presignedPutObject(minioBucket, path, 5*60, (err, url) => {
-            if (err){
-                this.setState({loading:false})
+        this.setState({ loading: true })
+        minioClient.presignedPutObject(minioBucket, path, 5 * 60, (err, url) => {
+            if (err) {
+                this.setState({ loading: false })
                 return console.log(err);
             }
-            Axios.put(url,file)
-            .then(res => {
-                this.setState({loading:false})
-                this.setState({
-                    patientMedData: {
-                        ...this.state.patientMedData,
-                        [e.target.name]: path
-                    }
+            Axios.put(url, file)
+                .then(res => {
+                    this.setState({ loading: false })
+                    this.setState({
+                        patientMedData: {
+                            ...this.state.patientMedData,
+                            [e.target.name]: path
+                        }
+                    })
                 })
-            })
-            .catch(err => {
-                this.setState({loading:false})
-                console.log(err);
-            })
+                .catch(err => {
+                    this.setState({ loading: false })
+                    console.log(err);
+                })
         })
 
     }
@@ -322,29 +323,29 @@ class PatientHistoryHook extends Component {
     }
 
     rulesRegex = obj => {
-        if(!obj?.pattern?.value) return obj;
+        if (!obj?.pattern?.value) return obj;
         obj.pattern.value = new RegExp(obj.pattern.value);
         return obj;
     }
 
     render() {
-        const {classes,values} = this.props;
+        const { classes, values } = this.props;
         const { handleSubmit, register, formState: { errors }, control, reset, clearErrors, setValue } = this.props;
         return (
             <div className="patientHistoryHomeStyle">
                 {this.state.userInfo.admin || this.state.userInfo.stationForm ? null : <Navbar />}
                 {this.state.userInfo.stationForm ? null :
                     <div className="header">
-                        <button style={{border:"none",background:"none",marginRight:"auto"}} onClick={this.conditionalBack}>
+                        <button style={{ border: "none", background: "none", marginRight: "auto" }} onClick={this.conditionalBack}>
                             <img className="backArrow" src={BackArrow} />
                         </button>
-                        <label style={{marginRight:"auto",fontWeight:"600",fontSize:"24px",wordBreak:"normal"}} className="formHeaders">Patient Medical History</label>
+                        <label style={{ marginRight: "auto", fontWeight: "600", fontSize: "24px", wordBreak: "normal" }} className="formHeaders">Patient Medical History</label>
                     </div>
                 }
 
-            <label style={{fontWeight:"400",fontSize:"18px"}} className="formHeaders">
-                {values.userInfo.first_name} {values.userInfo.last_name} | {values.userInfo.patient_id}
-            </label>
+                <label style={{ fontWeight: "400", fontSize: "18px" }} className="formHeaders">
+                    {values.userInfo.first_name} {values.userInfo.last_name} | {values.userInfo.patient_id}
+                </label>
 
                 {
                     this.state.disabled ? (
@@ -356,87 +357,87 @@ class PatientHistoryHook extends Component {
                     <div className="formFields">
                         {
                             this.state.FormFields["medical_history"]?.parameters?.map(field => {
-                                if(field.field === "text") {
+                                if (field.field === "text") {
                                     return (
                                         <Controller
-                                        key={field.name}
-                                        name={field.name}
-                                        control={control}
-                                        defaultValue=""
-                                        rules={this.rulesRegex(field.rules)}
-                                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                                        <TextField
-                                            type={field.type}
-                                            label={field.name.replace(/_/g,' ').toUpperCase()}
-                                            variant="outlined"
-                                            error={!!error}
-                                            helperText={error ? error.message : null}
-                                            disabled={this.state.disabled}
-                                            className={classes.textfields}
-                                            placeholder="Type here"
-                                            InputLabelProps={{
-                                                shrink: true,
-                                                className: classes.textfieldLabel
-                                            }}
-                                            InputProps={{
-                                                classes: {
-                                                notchedOutline: classes.textfieldBorder
-                                                }
-                                            }}
-                                            value={this.state.patientMedData[field.name] || ""}
-                                            onChange={e => {
-                                                onChange(e);
-                                                this.handleChange(field.name,e.target.value);
-                                            }}
-                                        />
-                                        )}
-                                    />
-                                    )
-                                }
-                                else if(field.field === "dropdown"){
-                                    return (
-                                        <Controller
-                                        key={field.name}
-                                        name={field.name}
-                                        control={control}
-                                        defaultValue=""
-                                        rules={field.rules}
-                                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                                            <FormControl variant="outlined" className={classes.dropdown} error={!!error}>
-                                                <InputLabel shrink>{field.name.replace(/_/g,' ').toUpperCase()}</InputLabel>
-                                                <Select
-                                                    name={field.name}
+                                            key={field.name}
+                                            name={field.name}
+                                            control={control}
+                                            defaultValue=""
+                                            rules={this.rulesRegex(field.rules)}
+                                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                                <TextField
+                                                    type={field.type}
+                                                    label={field.name.replace(/_/g, ' ').toUpperCase()}
+                                                    variant="outlined"
+                                                    error={!!error}
+                                                    helperText={error ? error.message : null}
+                                                    disabled={this.state.disabled}
+                                                    className={classes.textfields}
+                                                    placeholder="Type here"
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                        className: classes.textfieldLabel
+                                                    }}
+                                                    InputProps={{
+                                                        classes: {
+                                                            notchedOutline: classes.textfieldBorder
+                                                        }
+                                                    }}
                                                     value={this.state.patientMedData[field.name] || ""}
                                                     onChange={e => {
                                                         onChange(e);
-                                                        this.handleChange(field.name,e.target.value);
+                                                        this.handleChange(field.name, e.target.value);
                                                     }}
-                                                    MenuProps={{
-                                                        getContentAnchorEl: null,
-                                                        anchorOrigin: {
-                                                        vertical: "bottom",
-                                                        horizontal: "left",
-                                                        },
-                                                    }}
-                                                    input={<OutlinedInput notched label={field.name.replace(/_/g,' ').toUpperCase()} />}
-                                                    className={classes.selectDropdown}
-                                                    displayEmpty
-                                                    disabled={this.state.disabled}
-                                                >
-                                                    <MenuItem disabled value="">Select One</MenuItem>
-                                                    {
-                                                        field["values"].map(option => {
-                                                            return <MenuItem key={option} value={option}>{option.replace(/_/g,' ').toUpperCase()}</MenuItem>
-                                                        })
-                                                    }
-                                                </Select>
-                                                <FormHelperText>{error ? error.message : null}</FormHelperText>
-                                            </FormControl>
-                                        )}
-                                    />
+                                                />
+                                            )}
+                                        />
                                     )
                                 }
-                                else if(field.field === "radio"){
+                                else if (field.field === "dropdown") {
+                                    return (
+                                        <Controller
+                                            key={field.name}
+                                            name={field.name}
+                                            control={control}
+                                            defaultValue=""
+                                            rules={field.rules}
+                                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                                <FormControl variant="outlined" className={classes.dropdown} error={!!error}>
+                                                    <InputLabel shrink>{field.name.replace(/_/g, ' ').toUpperCase()}</InputLabel>
+                                                    <Select
+                                                        name={field.name}
+                                                        value={this.state.patientMedData[field.name] || ""}
+                                                        onChange={e => {
+                                                            onChange(e);
+                                                            this.handleChange(field.name, e.target.value);
+                                                        }}
+                                                        MenuProps={{
+                                                            getContentAnchorEl: null,
+                                                            anchorOrigin: {
+                                                                vertical: "bottom",
+                                                                horizontal: "left",
+                                                            },
+                                                        }}
+                                                        input={<OutlinedInput notched label={field.name.replace(/_/g, ' ').toUpperCase()} />}
+                                                        className={classes.selectDropdown}
+                                                        displayEmpty
+                                                        disabled={this.state.disabled}
+                                                    >
+                                                        <MenuItem disabled value="">Select One</MenuItem>
+                                                        {
+                                                            field["values"].map(option => {
+                                                                return <MenuItem key={option} value={option}>{option.replace(/_/g, ' ').toUpperCase()}</MenuItem>
+                                                            })
+                                                        }
+                                                    </Select>
+                                                    <FormHelperText>{error ? error.message : null}</FormHelperText>
+                                                </FormControl>
+                                            )}
+                                        />
+                                    )
+                                }
+                                else if (field.field === "radio") {
                                     return (
                                         <Controller
                                             key={field.name}
@@ -450,7 +451,7 @@ class PatientHistoryHook extends Component {
                                                     disabled={this.state.disabled}
                                                     onChange={e => {
                                                         onChange(e);
-                                                        this.handleChange(field.name,e.target.value);
+                                                        this.handleChange(field.name, e.target.value);
                                                     }}
                                                     error={error ? true : false}
                                                 >
@@ -460,11 +461,11 @@ class PatientHistoryHook extends Component {
                                                             field.values.map(option => {
                                                                 return (
                                                                     <FormControlLabel
-                                                                    classes={{
-                                                                        label: classes.checkboxLabel
-                                                                    }}
-                                                                    checked={this.state.patientMedData[field.name] === option}
-                                                                    key={option} value={option} control={<Radio />} label={option} />
+                                                                        classes={{
+                                                                            label: classes.checkboxLabel
+                                                                        }}
+                                                                        checked={this.state.patientMedData[field.name] === option}
+                                                                        key={option} value={option} control={<Radio />} label={option} />
                                                                 )
                                                             })
                                                         }
@@ -475,14 +476,14 @@ class PatientHistoryHook extends Component {
                                         />
                                     )
                                 }
-                                else if(field.field === "file"){
-                                    return(
+                                else if (field.field === "file") {
+                                    return (
                                         <div className={classes.file} key={field.name}>
-                                            <label style={{marginBottom:"0px",color:"#05056B"}} className="fileLabel">{field.name.replace(/_/g,' ').toUpperCase()}:</label>
+                                            <label style={{ marginBottom: "0px", color: "#05056B" }} className="fileLabel">{field.name.replace(/_/g, ' ').toUpperCase()}:</label>
                                             <input
                                                 disabled={this.state.disabled}
                                                 name={field.name}
-                                                style={{width:"200px",color:"#05056B"}}
+                                                style={{ width: "200px", color: "#05056B" }}
                                                 type="file" accept="image/*"
                                                 {...register(field.name, field.rules)}
                                                 onChange={e => {
@@ -491,45 +492,45 @@ class PatientHistoryHook extends Component {
                                                 }}
                                             />
                                             {
-                                            !this.state.patientMedData[field.name] ? null :
-                                                <img src={this.getUrl(this.state.patientMedData[field.name])} style={{height: "100px",width:"100px",border:"solid 2px",marginTop:"20px"}} alt="preview"  onClick={() => this.previewImage(this.getUrl(this.state.patientMedData[field.name]))} />
+                                                !this.state.patientMedData[field.name] ? null :
+                                                    <img src={this.getUrl(this.state.patientMedData[field.name])} style={{ height: "100px", width: "100px", border: "solid 2px", marginTop: "20px" }} alt="preview" onClick={() => this.previewImage(this.getUrl(this.state.patientMedData[field.name]))} />
                                             }
                                             {
                                                 !errors[field.name] ? null :
-                                                <>
-                                                    <label className="validationError">{errors[field.name] ? errors[field.name].message : null }</label>
-                                                </>
+                                                    <>
+                                                        <label className="validationError">{errors[field.name] ? errors[field.name].message : null}</label>
+                                                    </>
                                             }
                                         </div>
                                     )
                                 }
-                                else if(field.field === "checkbox")
-                                return (
-                                    <FormControl key={field.name} component="fieldset" className={classes.checkboxControl}>
-                                        <FormLabel component="legend" className={classes.checkboxLegend}>{field.name.toUpperCase()}</FormLabel>
-                                        <FormGroup>
-                                            <>
-                                            {
-                                                field.values.map(item => {
-                                                    return (
-                                                        <FormControlLabel key={item}
-                                                        classes={{
-                                                            label: classes.checkboxLabel
-                                                        }}
-                                                        control={<Checkbox
-                                                                checked={this.state.patientMedData[field.name]?.[item] || false}
-                                                                onChange={e => this.handleCheckboxChange(e,field.name,item)}
-                                                                disabled={this.state.disabled}
-                                                                />}
-                                                        label={item}
-                                                        />
-                                                    )
-                                                })
-                                            }
-                                            </>
-                                        </FormGroup>
-                                    </FormControl>
-                                )
+                                else if (field.field === "checkbox")
+                                    return (
+                                        <FormControl key={field.name} component="fieldset" className={classes.checkboxControl}>
+                                            <FormLabel component="legend" className={classes.checkboxLegend}>{field.name.toUpperCase()}</FormLabel>
+                                            <FormGroup>
+                                                <>
+                                                    {
+                                                        field.values.map(item => {
+                                                            return (
+                                                                <FormControlLabel key={item}
+                                                                    classes={{
+                                                                        label: classes.checkboxLabel
+                                                                    }}
+                                                                    control={<Checkbox
+                                                                        checked={this.state.patientMedData[field.name]?.[item] || false}
+                                                                        onChange={e => this.handleCheckboxChange(e, field.name, item)}
+                                                                        disabled={this.state.disabled}
+                                                                    />}
+                                                                    label={item}
+                                                                />
+                                                            )
+                                                        })
+                                                    }
+                                                </>
+                                            </FormGroup>
+                                        </FormControl>
+                                    )
                             })
                         }
                     </div>
@@ -540,24 +541,24 @@ class PatientHistoryHook extends Component {
 
 
 
-            <div style={{display: !this.state.userInfo.admin ? "flex" : "none"}}>
-                <button onClick={this.exit} className="historyExitButton">Exit  <FiIcons.FiLogOut/></button>
-                <button onClick={this.next} className="historyLogoutButton">Next</button>
-            </div>
+                <div style={{ display: !this.state.userInfo.admin ? "flex" : "none" }}>
+                    <button onClick={this.exit} className="historyExitButton">Exit  <FiIcons.FiLogOut /></button>
+                    <button onClick={this.next} className="historyLogoutButton">Next</button>
+                </div>
 
-            {
-                this.state.loading ? (
-                    <Backdrop className={classes.backdrop} open>
-                        <CircularProgress color="inherit" />
-                    </Backdrop>
-                ) : null
-            }
+                {
+                    this.state.loading ? (
+                        <Backdrop className={classes.backdrop} open>
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
+                    ) : null
+                }
             </div>
         )
     }
 }
 
-function PatientHistory(props){
+function PatientHistory(props) {
     const form = useForm()
     return (
         <PatientHistoryHook {...form} {...props} />
