@@ -439,7 +439,7 @@ function PatientForm(props) {
         formDataflask.append("path", path);
 
         Axios({
-            url: process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_FLASK_URL_DEV : process.env.REACT_APP_FLASK_URL_PROD + "/get_minio_url",
+            url: process.env.REACT_APP_FLASK_URL + "/get_minio_url",
             method: "POST",
             data: formDataflask,
         })
@@ -458,7 +458,7 @@ function PatientForm(props) {
         formDataflask.append("path", path);
 
         let minio_object_url = Axios({
-            url: process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_FLASK_URL_DEV : process.env.REACT_APP_FLASK_URL_PROD + "/get_minio_url",
+            url: process.env.REACT_APP_FLASK_URL + "/get_minio_url",
             method: "POST",
             data: formDataflask,
         })
@@ -497,7 +497,7 @@ function PatientForm(props) {
 
 
             Axios({
-                url: process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_FLASK_URL_DEV : process.env.REACT_APP_FLASK_URL_PROD + "/upload",
+                url: process.env.REACT_APP_FLASK_URL + "/upload",
                 method: "POST",
                 data: formDataflask,
             })
@@ -597,7 +597,7 @@ function PatientForm(props) {
                 if (props.values.mobile_number) {
                     props.returnHome()
                 } else {
-                    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/enroll`;
+                    window.location = `${process.env.REACT_APP_URL_PREFIX}/enroll`;
                 }
             })
             //response status 400 meaning error somewhere

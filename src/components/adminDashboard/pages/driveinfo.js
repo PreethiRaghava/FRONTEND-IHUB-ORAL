@@ -85,7 +85,7 @@ class DriveInfo extends Component {
 
     }
     back() {
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/drives`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/drives`;
     }
     close_modal() {
         this.setState({ modal_open: false })
@@ -124,7 +124,7 @@ class DriveInfo extends Component {
     replace_form() {
         localStorage.setItem("iiith_replace_form_id", this.state.form_id)
         localStorage.setItem("iiith_replace_drive_id", this.state.drive_id)
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/replacedatafroms`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/replacedatafroms`;
     }
     async filtering() {
         let ress = [];

@@ -197,7 +197,7 @@ class TAddDataForm extends Component {
         else this.setState({ description: val })
     };
     discard_form = () => {
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/dataforms`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/dataforms`;
     }
     create_form = () => {
         alert("add bk :{")

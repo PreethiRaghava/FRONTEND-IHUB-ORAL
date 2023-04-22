@@ -99,7 +99,7 @@ function TransferList(props) {
     const discard_form = () => {
         localStorage.removeItem("iiith_replace_drive_id")
         localStorage.removeItem("iiith_replace_form_id")
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/driveinfo`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/driveinfo`;
     }
     const create_form = async () => {
         localStorage.removeItem("iiith_replace_drive_id")
@@ -122,11 +122,11 @@ function TransferList(props) {
         })
             .then(res => {
                 alert("Dataform Updated")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/driveinfo`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/driveinfo`;
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
         setfom(false)
     }
@@ -301,7 +301,7 @@ class ReplaceDataForm extends Component {
         var tt = await Axios.get("/access/metadata")
         if (!tt.data.data) {
             alert("Fault in MetaData");
-            window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+            window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
         }
         this.setState({ TreeData: tt.data.data })
 
@@ -317,7 +317,7 @@ class ReplaceDataForm extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
 
         var drivelist = ""
@@ -334,7 +334,7 @@ class ReplaceDataForm extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
 
         let nodes = [];

@@ -106,7 +106,7 @@ class AssistOtp extends Component {
             .then((result) => {
                 console.log("User is verified");
                 localStorage.setItem('assist_mobile_number', this.props.values.phone)
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/enrollReg`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/enrollReg`;
             })
             .catch((error) => {
                 this.setState({ loading: false })

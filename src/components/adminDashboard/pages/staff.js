@@ -41,7 +41,7 @@ class Staff extends Component {
             })
             .catch(err => {
                 // alert("not authorized")
-                // window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                // window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
         await Axios({
             method: "POST",
@@ -65,7 +65,7 @@ class Staff extends Component {
             })
             .catch(err => {
                 // alert("not authorized")
-                // window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                // window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
     }
     render() {
@@ -81,7 +81,7 @@ class Staff extends Component {
                             <div className="df-subtitle">Want to register an Assistant ?</div>
                             <div className="df-description" >Click on <b>ADD Assistant</b> button to add new assistant</div>
                         </div>
-                        <div className="df-create"><Button href={`${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/addassistant`} variant="contained" color="primary" startIcon={<NoteAddOutlinedIcon />}> Add Assistant</Button></div>
+                        <div className="df-create"><Button href={`${process.env.REACT_APP_URL_PREFIX}/admindashboard/addassistant`} variant="contained" color="primary" startIcon={<NoteAddOutlinedIcon />}> Add Assistant</Button></div>
                     </div>
                     <div className="df-end" ></div>
                     <div className="df-footer" ></div>

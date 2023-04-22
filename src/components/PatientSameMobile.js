@@ -76,7 +76,7 @@ class PatientSameMobile extends Component {
 
     exit = e => {
         this.setState({ loading: true })
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/enroll`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/enroll`;
     }
 
     viewVisits = (e, patient_id) => {

@@ -68,7 +68,7 @@ class StationForm extends Component {
 
     exit = () => {
         this.setState({ loading: true });
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/enrollReg`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/enrollReg`;
     }
 
     handleInputType = e => {

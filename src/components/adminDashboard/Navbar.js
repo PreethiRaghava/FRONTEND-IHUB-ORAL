@@ -160,7 +160,7 @@ export default function AdminNavbar(props) {
         localStorage.removeItem("iiith-hcp-org_name");
         localStorage.removeItem("iiith-hcp-org_logo");
         localStorage.removeItem("iiith-hcp-user_login");
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
       })
       .catch(error => {
         if (error.response) {

@@ -91,7 +91,7 @@ function TransferList(props) {
     };
 
     const discard_form = () => {
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/dataforms`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/dataforms`;
     }
     const create_form = async () => {
         console.log(right)
@@ -111,11 +111,11 @@ function TransferList(props) {
         })
             .then(res => {
                 alert("Dataform Created")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/dataforms`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/dataforms`;
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
     }
     const handleChange2 = (event) => {
@@ -293,7 +293,7 @@ class AddDataForm extends Component {
         var tt = await Axios.get("/access/metadata")
         if (!tt.data.data) {
             alert("Fault in MetaData");
-            window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+            window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
         }
         this.setState({ TreeData: tt.data.data })
         var user = ""
@@ -308,7 +308,7 @@ class AddDataForm extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
         var drivelist = ""
 

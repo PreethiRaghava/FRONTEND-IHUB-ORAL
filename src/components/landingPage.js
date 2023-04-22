@@ -39,7 +39,7 @@ function LandingPage() {
 
     const login = () => {
         setLoading(true);
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/login`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/login`;
     }
     return (
         <div style={styles}>

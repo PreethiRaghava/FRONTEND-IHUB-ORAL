@@ -105,19 +105,19 @@ export default function AdminDataForm(props) {
     setOpen(false);
   };
   const homezz = () => {
-    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/staff`;
+    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/staff`;
   }
   const drivezz = () => {
-    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/drives`;
+    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/drives`;
   }
   const adddrivezz = () => {
-    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/adddrive`;
+    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/adddrive`;
   }
   const dataformzz = () => {
-    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/dataforms`;
+    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/dataforms`;
   }
   const adddataformzz = () => {
-    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/createdataform`;
+    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/createdataform`;
   }
   const logoutme = () => {
     Axios({
@@ -132,7 +132,7 @@ export default function AdminDataForm(props) {
         localStorage.removeItem("iiith-hcp-org_name");
         localStorage.removeItem("iiith-hcp-org_logo");
         localStorage.removeItem("iiith-hcp-user_login");
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
       })
       .catch(error => {
         if (error.response) {

@@ -50,10 +50,10 @@ class AddAssistant extends Component {
                 alert("Can't update. Try Again.")
             })
 
-        // window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/driveinfo`;
+        // window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/driveinfo`;
     }
     discard = () => {
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/staff`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/staff`;
     }
     async componentDidMount() {
         let assist_from_prop = [];
@@ -89,7 +89,7 @@ class AddAssistant extends Component {
             .catch(err => {
                 console.log(err)
                 alert("Not Authorized Login Again")
-                // window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                // window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
     }
     render() {

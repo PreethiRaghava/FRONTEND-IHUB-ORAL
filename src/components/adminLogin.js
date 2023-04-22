@@ -44,7 +44,7 @@ class AdminLogin extends Component {
       localStorage.setItem("iiith-hcp-org_name", a)
       localStorage.setItem("iiith-hcp-org_logo", aa)
       localStorage.setItem("iiith-hcp-user_login", aaa)
-      window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/drives`;
+      window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/drives`;
     })
       .catch(err => {
         console.log(err.response);

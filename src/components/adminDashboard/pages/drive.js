@@ -52,7 +52,7 @@ class Drive extends Component {
                             });
                             localStorage.setItem('drive_selected', app_drive_id)
                             localStorage.setItem('iiithcp-orgid', this.state.org_id)
-                            window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/driveinfo`;
+                            window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/driveinfo`;
                         };
                         return <Button onClick={onClick} width='140' color="primary" variant="contained">View</Button>;
                     }
@@ -75,7 +75,7 @@ class Drive extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
         await Axios({
             method: "POST",
@@ -98,7 +98,7 @@ class Drive extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
     }
     render() {
@@ -114,7 +114,7 @@ class Drive extends Component {
                             <div className="df-subtitle">Want to add new Drive ?</div>
                             <div className="df-description" >Click on <b>ADD Drive</b> button to create new drive</div>
                         </div>
-                        <div className="df-create"><Button href={`${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/adddrive`} variant="contained" color="primary" startIcon={<NoteAddOutlinedIcon />}> Add Drive </Button></div>
+                        <div className="df-create"><Button href={`${process.env.REACT_APP_URL_PREFIX}/admindashboard/adddrive`} variant="contained" color="primary" startIcon={<NoteAddOutlinedIcon />}> Add Drive </Button></div>
                     </div>
                     <div className="df-end" ></div>
                     <div className="df-footer" ></div>

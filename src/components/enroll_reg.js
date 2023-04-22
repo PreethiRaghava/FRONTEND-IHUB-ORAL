@@ -157,7 +157,7 @@ class EnrollReg extends Component {
         })
         localStorage.setItem("station_category", e.target.value);
         this.modalClose();
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/stationform`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/stationform`;
     }
 
     driveSet = e => {
@@ -199,12 +199,12 @@ class EnrollReg extends Component {
 
     register = () => {
         this.setState({ loading: true });
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/register`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/register`;
     }
 
     enroll = () => {
         this.setState({ loading: true });
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/enroll`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/enroll`;
     }
 
     logout = e => {
@@ -221,7 +221,7 @@ class EnrollReg extends Component {
                 localStorage.removeItem("assist_org_name");
                 localStorage.removeItem("assist_mobile_number");
                 localStorage.removeItem("assist_org_logo");
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/login`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/login`;
             })
             .catch(error => {
                 this.setState({ loading: false })

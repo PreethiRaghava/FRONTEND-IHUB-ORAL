@@ -29,13 +29,13 @@ class AddStaff extends Component {
         if (name === "email") this.setState({ email: val });
     };
     discard_drive = () => {
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/staff`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/staff`;
     }
     async create_drive(e) {
         e.preventDefault();
         if (!this.state.org_id) {
             alert("Not Authorized Login Again")
-            window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+            window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
         }
         else {
             var collected_data = {
@@ -54,7 +54,7 @@ class AddStaff extends Component {
                 .then(res => {
                     console.log(res)
                     alert("Assistant Added")
-                    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/staff`;
+                    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/staff`;
                 })
                 .catch(err => {
                     console.log(err)
@@ -77,7 +77,7 @@ class AddStaff extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
     }
     render() {

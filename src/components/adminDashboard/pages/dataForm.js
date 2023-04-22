@@ -87,7 +87,7 @@ class DataForm extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
     }
     render() {
@@ -124,7 +124,7 @@ class DataForm extends Component {
                             <div className="df-subtitle">Can't find form full filing your requirements ?</div>
                             <div className="df-description" >Click on <b>ADD FORM</b> button to create new form</div>
                         </div>
-                        <div className="df-create"><Button href={`${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/createdataform`} variant="contained" color="primary" startIcon={<NoteAddOutlinedIcon />}> Add form </Button></div>
+                        <div className="df-create"><Button href={`${process.env.REACT_APP_URL_PREFIX}/admindashboard/createdataform`} variant="contained" color="primary" startIcon={<NoteAddOutlinedIcon />}> Add form </Button></div>
                     </div>
                     <div className="df-end" ></div>
                     <div className="df-footer" ></div>

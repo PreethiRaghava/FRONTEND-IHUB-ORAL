@@ -137,13 +137,13 @@ class AddDrive extends Component {
         this.setState({ assist_ids: dd });
     };
     discard_drive = () => {
-        window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/drives`;
+        window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/drives`;
     }
     async create_drive(e) {
         e.preventDefault();
         if (!this.state.org_id) {
             alert("Not Authorized Login Again")
-            window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+            window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
         }
         else {
             var aa = "";
@@ -171,7 +171,7 @@ class AddDrive extends Component {
                 .then(res => {
                     console.log(res)
                     alert("Drive created")
-                    window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admindashboard/drives`;
+                    window.location = `${process.env.REACT_APP_URL_PREFIX}/admindashboard/drives`;
                 })
                 .catch(err => {
                     console.log(err)
@@ -209,7 +209,7 @@ class AddDrive extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
 
         var assistlist = ""
@@ -235,7 +235,7 @@ class AddDrive extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
 
         var formlist = ""
@@ -257,7 +257,7 @@ class AddDrive extends Component {
             })
             .catch(err => {
                 alert("Not Authorized Login Again")
-                window.location = `${process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}/admin`;
+                window.location = `${process.env.REACT_APP_URL_PREFIX}/admin`;
             })
 
     }

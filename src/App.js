@@ -21,7 +21,7 @@ import AdminReplaceDataForm from './components/adminDashboard/pages/adminReplace
 function App() {
 
   return (
-    <Router basename={process.env.REACT_APP_DEV === "true" ? process.env.REACT_APP_URL_PREFIX_DEV : process.env.REACT_APP_URL_PREFIX_PROD}>
+    <Router basename={process.env.REACT_APP_URL_PREFIX}>
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path="/login" component={LoginForm} />
