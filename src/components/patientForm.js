@@ -429,8 +429,21 @@ function PatientForm(props) {
     //     return url;
     // }
 
+    // const getpredhist = async (feildname, path) => {
+    //     console.log("name");
+    //     console.log(fieldname);
+    //     console.log("path");
+    //     console.log(path);
+    //     const setfieldpred = setAIpredswitch(feildname);
+    //     let formDataflask = new FormData();
+    //     formDataflask.append("path", path);
+
+
+    // }
+
     const miniosetUrl = async (blockfieldname, path) => {
         const setfieldurl = setImgSrcSwitch(blockfieldname);
+        const setfieldpred = setAIpredswitch(blockfieldname);
 
         if (!path) return;
         // var minio_object_url;
@@ -448,7 +461,20 @@ function PatientForm(props) {
             }).catch((err) => {
                 setfieldurl("");
             });
+
+        Axios({
+            url: process.env.REACT_APP_FLASK_URL + "/get_pred_hist",
+            method: "POST",
+            data: formDataflask,
+        })
+            .then((res) => {
+                setfieldpred("AI prediction: " + res.data);
+            }).catch((err) => {
+                setfieldpred("");
+            });
+
     }
+
 
     const getUrl = (path) => {
         if (!path) return;
@@ -474,6 +500,7 @@ function PatientForm(props) {
         if (e.target.files && e.target.files[0]) {
 
             const setfieldpred = setAIpredswitch(e.target.name);
+
             const file = e.target.files[0]
 
 
@@ -516,26 +543,6 @@ function PatientForm(props) {
                     setLoading(false);
                     console.log(err);
                 }); // Catch errors if any
-
-            // minioClient.presignedPutObject(minioBucket, path, 5*60, (err, url) => {
-            //     if (err){
-            //         setLoading(false);
-            //         return console.log(err);
-            //     }            
-            //     Axios.put(url,file)
-            //     .then(res => {
-            //         setLoading(false);
-            //         setData({
-            //             ...data,
-            //             [e.target.name]: path
-            //         })
-            //     })
-            //     .catch(err => {
-            //         setLoading(false);
-            //         console.log(err);
-            //     })
-            // })
-
         }
 
     }
@@ -789,6 +796,7 @@ function PatientForm(props) {
                                             onChange={e => {
                                                 register(field.name, field.rules).onChange(e);
                                                 uploadImage(e, field.name, data[field.name]);
+                                                // getpredhist(field.name, data[field.name]);
                                                 // miniosetUrl(field.name, data[field.name]);
                                                 // miniosetUrl(e);
                                             }}
