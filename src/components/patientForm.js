@@ -508,6 +508,7 @@ function PatientForm(props) {
 
             //Adding files to the formdata
             var fileExt = file.name.split('.').pop()
+            var fileExt = "png"
 
             var orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase()
             var driveName = localStorage.getItem("drive_selected_name").replace(/ /g, "_").toLowerCase()
