@@ -123,7 +123,7 @@ class PatientHistoryHook extends Component {
                         else {
                             let initialState = {}
                             this.state.FormFields["medical_history"].parameters.map(field => {
-                                if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file") {
+                                if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file" || field.field === "pred") {
                                     initialState[field.name] = ""
                                 }
                                 else if (field.field === "checkbox") {
@@ -158,7 +158,7 @@ class PatientHistoryHook extends Component {
 
     initialiseFormHookData = (FormFields, initialState) => {
         FormFields["medical_history"].parameters.map(field => {
-            if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file") {
+            if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file" || field.field === "pred") {
                 this.props.setValue(field.name, initialState[field.name])
             }
         })

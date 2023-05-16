@@ -97,7 +97,7 @@ class RegisterHook extends Component {
                 this.props.populatePatIden(res.data.data);
                 let initialState = {}
                 res.data.data["patient_identifiers"].parameters.map(field => {
-                    if (field.field === "text" || field.field === "dropdown" || field.field === "autocomplete" || field.field === "radio" || field.field === "file") {
+                    if (field.field === "text" || field.field === "dropdown" || field.field === "autocomplete" || field.field === "radio" || field.field === "file" || field.field === "pred") {
                         initialState[field.name] = ""
                     }
                     else if (field.field === "checkbox") {

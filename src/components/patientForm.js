@@ -111,37 +111,18 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function PatientForm(props) {
+const PatientForm = function (props) {
     const classes = useStyles();
-    const [topbuttonPopup, topsetButtonPopup] = React.useState(false);
-    const [leftbuttonPopup, leftsetButtonPopup] = React.useState(false);
-    const [rightbuttonPopup, rightsetButtonPopup] = React.useState(false);
-    const [bottombuttonPopup, bottomsetButtonPopup] = React.useState(false);
-    const [othersbuttonPopup, otherssetButtonPopup] = React.useState(false);
-    const [topAIpred, topsetAIpred] = React.useState('');
-    const [leftAIpred, leftsetAIpred] = React.useState('');
-    const [rightAIpred, rightsetAIpred] = React.useState('');
-    const [bottomAIpred, bottomsetAIpred] = React.useState('');
-    const [othersAIpred, otherssetAIpred] = React.useState('');
-    const [others2AIpred, others2setAIpred] = React.useState('');
-    const [topimagesrc, topsetimgsrc] = React.useState('');
-    const [leftimagesrc, leftsetimgsrc] = React.useState('');
-    const [rightimagesrc, rightsetimgsrc] = React.useState('');
-    const [bottomimagesrc, bottomsetimgsrc] = React.useState('');
-    const [othersimagesrc, otherssetimgsrc] = React.useState('');
-    const [others2imagesrc, others2setimgsrc] = React.useState('');
-    const [biopsyimagesrc, biopsysetimgsrc] = React.useState('');
     const [selectCategory, setSelectCategory] = React.useState('');
     const [requirement, setRequirement] = React.useState('manual');
     const [FormFields, setFormFields] = React.useState({});
     const [data, setData] = React.useState({});
+    const [tempdata, setTempData] = React.useState({});
     const [imgData, setImgData] = React.useState("");
     const [disabled, setDisabled] = React.useState(true);
     const [loading, setLoading] = React.useState(false);
     const userInfo = props.values.userInfo;
     const [stationShow, setStationShow] = React.useState(false);
-
-    //console.log(props.values.userInfo)
 
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -152,68 +133,7 @@ function PatientForm(props) {
         return new File([u8arr], filename, { type: mime });
     }
 
-
     const { handleSubmit, register, formState: { errors }, control, reset, clearErrors, setValue } = useForm();
-
-
-    const AIpredswitch = (predFeildName) => {
-        switch (predFeildName) {
-
-            case "top": return topAIpred;
-            case "bottom": return bottomAIpred;
-            case "left": return leftAIpred;
-            case "right": return rightAIpred;
-            case "others": return othersAIpred;
-            case "others2": return others2AIpred;
-
-            default: return ''
-        }
-    }
-
-    const setAIpredswitch = (predFeildName) => {
-        switch (predFeildName) {
-
-            case "top": return topsetAIpred;
-            case "bottom": return bottomsetAIpred;
-            case "left": return leftsetAIpred;
-            case "right": return rightsetAIpred;
-            case "others": return otherssetAIpred;
-            case "others2": return others2setAIpred;
-
-            default: return otherssetAIpred
-        }
-    }
-
-    const imgSrcSwitch = (predFeildName) => {
-        switch (predFeildName) {
-
-            case "top": return topimagesrc;
-            case "bottom": return bottomimagesrc;
-            case "left": return leftimagesrc;
-            case "right": return rightimagesrc;
-            case "others": return othersimagesrc;
-            case "others2": return others2imagesrc;
-            case "biopsyform": return biopsyimagesrc;
-
-            default: return ''
-        }
-    }
-
-    const setImgSrcSwitch = (predFeildName) => {
-        switch (predFeildName) {
-
-            case "top": return topsetimgsrc;
-            case "bottom": return bottomsetimgsrc;
-            case "left": return leftsetimgsrc;
-            case "right": return rightsetimgsrc;
-            case "others": return otherssetimgsrc;
-            case "others2": return others2setimgsrc;
-            case "biopsyform": return biopsysetimgsrc;
-
-            default: return otherssetAIpred
-        }
-    }
-
 
     React.useEffect(() => {
         if (userInfo.admin) {
@@ -312,6 +232,7 @@ function PatientForm(props) {
                 setLoading(false);
                 console.log(res.data)
                 setData({})
+                setTempData({})
                 reset()
                 setSelectCategory(userInfo.stationForm ? userInfo.stationCategory : "");
                 if (userInfo.admin) {
@@ -332,7 +253,7 @@ function PatientForm(props) {
 
     const initialiseFormHookData = (FormFields, category, initialState) => {
         FormFields[category].parameters.map(field => {
-            if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file") {
+            if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file" || field.field === "pred") {
                 setValue(field.name, initialState[field.name])
             }
         })
@@ -365,7 +286,7 @@ function PatientForm(props) {
                 }
                 initialState = {}
                 FormFields[category].parameters.map(field => {
-                    if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file") {
+                    if (field.field === "text" || field.field === "dropdown" || field.field === "radio" || field.field === "file" || field.field === "pred") {
                         initialState[field.name] = "";
                     }
                     else if (field.field === "checkbox") {
@@ -418,61 +339,24 @@ function PatientForm(props) {
         setDisabled(false);
     }
 
-    // const getUrl = path => {
-    //     if(!path) return;
-    //     var url;
-    //     minioClient.presignedUrl('GET', minioBucket, path, 1*60*60, function(err, presignedUrl) {
-    //         if (err) return console.log(err)
-    //         // console.log(presignedUrl)
-    //         url = presignedUrl
-    //       })
-    //     return url;
-    // }
-
-    // const getpredhist = async (feildname, path) => {
-    //     console.log("name");
-    //     console.log(fieldname);
-    //     console.log("path");
-    //     console.log(path);
-    //     const setfieldpred = setAIpredswitch(feildname);
-    //     let formDataflask = new FormData();
-    //     formDataflask.append("path", path);
-
-
-    // }
-
-    const miniosetUrl = async (blockfieldname, path) => {
-        const setfieldurl = setImgSrcSwitch(blockfieldname);
-        const setfieldpred = setAIpredswitch(blockfieldname);
-
-        if (!path) return;
-        // var minio_object_url;
-
+    const miniogetURL = async (path) => {
+        if (!path) return "";
+        let imgURL = "";
         let formDataflask = new FormData();
         formDataflask.append("path", path);
-
-        Axios({
+        await Axios({
             url: process.env.REACT_APP_FLASK_URL + "/get_minio_url",
             method: "POST",
             data: formDataflask,
         })
             .then((res) => {
-                setfieldurl(res.data.minio_url);
+                setTempData({
+                    ...tempdata,
+                    [path]: res.data.minio_url,
+                })
             }).catch((err) => {
-                setfieldurl("");
+                console.log(err);
             });
-
-        Axios({
-            url: process.env.REACT_APP_FLASK_URL + "/get_pred_hist",
-            method: "POST",
-            data: formDataflask,
-        })
-            .then((res) => {
-                setfieldpred("AI prediction: " + res.data);
-            }).catch((err) => {
-                setfieldpred("");
-            });
-
     }
 
 
@@ -499,14 +383,9 @@ function PatientForm(props) {
     const uploadImage = async (e, varfeildname, vardataname) => {
         if (e.target.files && e.target.files[0]) {
 
-            const setfieldpred = setAIpredswitch(e.target.name);
-
             const file = e.target.files[0]
-
-
             let formDataflask = new FormData();
 
-            //Adding files to the formdata
             var fileExt = file.name.split('.').pop()
             var fileExt = "png"
 
@@ -520,9 +399,7 @@ function PatientForm(props) {
             formDataflask.append("name", "oral_cavity");
             formDataflask.append("path", path);
 
-
             setLoading(true);
-
 
             Axios({
                 url: process.env.REACT_APP_FLASK_URL + "/upload",
@@ -531,21 +408,26 @@ function PatientForm(props) {
             })
                 .then((res) => {
                     setLoading(false);
-                    setData({
-                        ...data,
-                        [e.target.name]: path
-                    })
-                    if (e.target.name !== "biopsyform") {
-                        setfieldpred("AI prediction: " + res.data);
+                    if (data.hasOwnProperty(e.target.name + "_pred")) {
+                        setData({
+                            ...data,
+                            [e.target.name]: path,
+                            [e.target.name + "_pred"]: res.data
+                        })
                     }
-                    miniosetUrl(varfeildname, vardataname);
-                }) // Handle the response from backend here
+                    else {
+                        setData({
+                            ...data,
+                            [e.target.name]: path,
+                        })
+                    }
+                    miniogetURL(path);
+                })
                 .catch((err) => {
                     setLoading(false);
                     console.log(err);
-                }); // Catch errors if any
+                });
         }
-
     }
 
     const isString = (value) => {
@@ -781,14 +663,21 @@ function PatientForm(props) {
                                     </FormControl>
                                 )
                             }
+                            else if (field.field === "pred") {
+                                return (
+                                    !data[field.name] ? null :
+                                        <label style={{ marginBottom: "0px", color: "#05056B" }} className="predLabel">{field.name.replace("_", " ") + " : " + data[field.name]}</label>
+                                )
+                            }
                             else if (field.field === "file") {
-                                if (data[field.name] !== null) {
-                                    miniosetUrl(field.name, data[field.name]);
-                                };
-
+                                if (data[field.name] !== "") {
+                                    if (!tempdata[data[field.name]]) {
+                                        miniogetURL(data[field.name]);
+                                    }
+                                }
                                 return (
                                     <div className={classes.file} key={field.name}>
-                                        <label style={{ marginBottom: "0px", color: "#05056B" }} className="fileLabel">{field.name.replace(/_/g, ' ').toUpperCase()}:</label>
+                                        <label style={{ marginBottom: "0px", color: "#05056B" }} className="fileLabel">{field.name.replace(/_/g, ' ').toUpperCase()}</label>
                                         <input
                                             type="file"
                                             accept="image/*"
@@ -797,27 +686,15 @@ function PatientForm(props) {
                                             onChange={e => {
                                                 register(field.name, field.rules).onChange(e);
                                                 uploadImage(e, field.name, data[field.name]);
-                                                // getpredhist(field.name, data[field.name]);
-                                                // miniosetUrl(field.name, data[field.name]);
-                                                // miniosetUrl(e);
                                             }}
 
                                             disabled={disabled}
                                             name={field.name}
                                             style={{ width: "200px", color: "#05056B" }}
                                         />
-                                        {/* <div disabled={disabled} id={field.name+'overridediv'} className={field.name+"overridesubmitButton"} onClick={() => setpopupswitchtrue(field.name)} > {"Open Camera for: "+field.name}
-                                    <Popup trigger={popupswitch(field.name)} triggerhandleTakePhotoAnimationDone={handleTakePhotoAnimationDone} field_name={field.name}>
-                                        {"Button Camera for: "+field.name}
-                                    </Popup>
-                                    </div> */}
-                                        <label style={{ marginBottom: "0px", color: "#05056B" }} className="fileLabel">{AIpredswitch(field.name)}</label>
-                                        {/* <img src={getUrl(field.name)} style={{height: "100px",width:"100px",border:"solid 2px",marginTop:"10px"}} alt="preview"  onClick={() => previewImage(getUrl(data[field.name]))} /> */}
                                         {
-                                            // field.name ? null :
                                             !data[field.name] ? null :
-                                                // <img src={getUrl(data[field.name])} style={{height: "100px",width:"100px",border:"solid 2px",marginTop:"10px"}} alt="preview"  onClick={() => previewImage(getUrl(data[field.name]))} />
-                                                <img src={imgSrcSwitch(field.name)} style={{ height: "100px", width: "100px", border: "solid 2px", marginTop: "10px" }} alt="preview" onClick={() => previewImage(getUrl(data[field.name]))} onLoad={() => miniosetUrl(field.name, data[field.name])} />
+                                                <img src={tempdata[data[field.name]]} style={{ height: "100px", width: "100px", border: "solid 2px", marginTop: "10px" }} alt="preview" onClick={() => previewImage(tempdata[data[field.name]])} />
                                         }
                                         {
                                             !errors[field.name] ? null :
