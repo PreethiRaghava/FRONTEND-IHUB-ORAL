@@ -123,6 +123,7 @@ const PatientForm = function (props) {
     const [loading, setLoading] = React.useState(false);
     const userInfo = props.values.userInfo;
     const [stationShow, setStationShow] = React.useState(false);
+    const isDataUpdating = React.useRef(false);
 
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -135,6 +136,7 @@ const PatientForm = function (props) {
 
     const { handleSubmit, register, formState: { errors }, control, reset, clearErrors, setValue } = useForm();
 
+
     React.useEffect(() => {
         if (userInfo.admin) {
             adminGetAllCat();
@@ -143,6 +145,48 @@ const PatientForm = function (props) {
             patientGetAllowed();
         }
     }, [props.values]);
+    React.useEffect(() => {
+        try {
+            const miniogetURLs = async (paths) => {
+
+                let final_results = {}
+                const requests = paths.map(async path => {
+                    if (path !== "") {
+                        let formDataflask = new FormData();
+                        formDataflask.append("path", path);
+                        await Axios({
+                            url: process.env.REACT_APP_FLASK_URL + "/get_minio_url",
+                            method: "POST",
+                            data: formDataflask,
+                        })
+                            .then((res) => {
+                                if (res.data.minio_url !== "") {
+                                    final_results[path] = res.data.minio_url;
+                                }
+                            }).catch((err) => {
+                                console.log(err);
+                            });
+                    }
+                })
+                const responses = await Promise.all(requests);
+                setTempData(final_results);
+            };
+            let filetypename = [];
+            FormFields[Object.keys(FormFields)[0]].parameters.map(field => {
+                if (field.field === "file") {
+                    if (data.hasOwnProperty(field.name)) {
+                        if (data[field.name] !== "") {
+                            filetypename.push(data[field.name]);
+                        }
+                    }
+                }
+            })
+            miniogetURLs(filetypename);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }, [data]);
+    ////////////////////////////////////
 
     const adminGetAllCat = () => {
         setLoading(true);
@@ -156,7 +200,6 @@ const PatientForm = function (props) {
         })
             .then(res => {
                 setLoading(false)
-                console.log(res.data)
                 setFormFields(res.data.data);
                 setSelectCategory('');
             })
@@ -182,7 +225,6 @@ const PatientForm = function (props) {
         })
             .then(res => {
                 setLoading(false)
-                //console.log(res.data)
                 setFormFields(res.data.data);
                 setSelectCategory(props.values.userInfo.stationForm ? props.values.userInfo.stationCategory : '');
 
@@ -275,6 +317,27 @@ const PatientForm = function (props) {
         })
             .then(res => {
                 setLoading(false);
+
+                ///////////////////////
+                // let filetypename = [];
+                // FormFields[category].parameters.map(field => {
+                //     if (field.field === "file") {
+                //         if (res.data.data[0]?.["tr_data"].hasOwnProperty(field.name)) {
+                //             if (res.data.data[0]?.["tr_data"][field.name] !== "") {
+                //                 filetypename.push(res.data.data[0]?.["tr_data"][field.name]);
+                //             }
+                //         }
+                //     }
+                // })
+                // miniogetURLs(filetypename);
+                // Object.keys(res.data.data[0]?.["tr_data"]).map(key => {
+                //     if (filetypename.includes(key)) {
+                //         console.log(key, res.data.data[0]?.["tr_data"][key]);
+                //         miniogetURL(res.data.data[0]?.["tr_data"][key]);
+                //     }
+                // })
+                ///////////////////////
+
                 initialState = res.data.data[0]?.["tr_data"]
                 if (initialState && !isString(initialState)) {
                     setData(initialState)
@@ -298,6 +361,7 @@ const PatientForm = function (props) {
                     }
                 })
                 setData(initialState)
+                // miniogetURLs(filetypename);
 
             })
             .catch(error => {
@@ -339,12 +403,13 @@ const PatientForm = function (props) {
         setDisabled(false);
     }
 
-    const miniogetURL = async (path) => {
+    const miniogetURL = (path) => {
+        console.log("from miniogetURL", path);
         if (!path) return "";
         let imgURL = "";
         let formDataflask = new FormData();
         formDataflask.append("path", path);
-        await Axios({
+        Axios({
             url: process.env.REACT_APP_FLASK_URL + "/get_minio_url",
             method: "POST",
             data: formDataflask,
@@ -360,10 +425,13 @@ const PatientForm = function (props) {
     }
 
 
+
+
+
     const getUrl = (path) => {
         if (!path) return;
         // var minio_object_url;
-
+        console.log("from getURL");
         let formDataflask = new FormData();
         formDataflask.append("path", path);
 
@@ -670,11 +738,18 @@ const PatientForm = function (props) {
                                 )
                             }
                             else if (field.field === "file") {
-                                if (data[field.name] !== "") {
-                                    if (!tempdata[data[field.name]]) {
-                                        miniogetURL(data[field.name]);
-                                    }
-                                }
+                                // if (data[field.name] !== "") {
+                                //     if (!tempdata[data[field.name]]) {
+                                //         console.log("from initial if 1");
+                                //         console.log(data[field.name]);
+                                //         setTempData({
+                                //             ...tempdata,
+                                //             [data[field.name]]: "",
+                                //         })
+                                //         miniogetURL(data[field.name]);
+                                //         console.log("from initial if 2");
+                                //     }
+                                // }
                                 return (
                                     <div className={classes.file} key={field.name}>
                                         <label style={{ marginBottom: "0px", color: "#05056B" }} className="fileLabel">{field.name.replace(/_/g, ' ').toUpperCase()}</label>
