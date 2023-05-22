@@ -32,7 +32,7 @@ class PatientsAll extends Component {
         this.setState({ loading: true });
         Axios({
             method: "POST",
-            url: "/drive/getpatients",
+            url: process.env.REACT_APP_FLASK_URL + "/getpatients",
             data: {
                 driveID: localStorage.getItem("drive_selected")
             },
@@ -40,11 +40,13 @@ class PatientsAll extends Component {
         })
             .then(res => {
                 // console.log(res.data.data);
+                console.log("test1");
                 this.setState({ loading: false });
                 this.setState({
                     patientList: res.data.data["patient_list"],
                     patientListBackup: res.data.data["patient_list"],
                 })
+                console.log("test2");
             })
 
             .catch(error => {
