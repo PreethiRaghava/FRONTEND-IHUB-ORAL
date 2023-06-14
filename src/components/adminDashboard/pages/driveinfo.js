@@ -441,7 +441,8 @@ class DriveInfo extends Component {
             })
         await Axios({
             method: "POST",
-            url: "/drive/getpatients",
+            // url: "/drive/getpatients",
+            url: process.env.REACT_APP_FLASK_URL + "/getpatients",
             withCredentials: true,
             data: { driveID: this.state.drive_id }
         })

@@ -193,7 +193,8 @@ class StationForm extends Component {
         this.setState({ loading: true, modal_open: true })
         Axios({
             method: "POST",
-            url: "/drive/getpatients",
+            url: process.env.REACT_APP_FLASK_URL + "/getpatients",
+            // url: "/drive/getpatients",
             data: {
                 driveID: localStorage.getItem("drive_selected")
             },
