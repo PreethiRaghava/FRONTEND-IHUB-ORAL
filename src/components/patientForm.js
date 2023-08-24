@@ -502,40 +502,43 @@ const PatientForm = function (props) {
     //upload PDF only
     const uploadOnlyDOC = async (e, varfeildname, vardataname) => {
         if (e.target.files && e.target.files[0]) {
-            const file = e.target.files[0];
-            let formDataflask = new FormData();
+            const file = e.target.files[0]
+            let formDataflask = new FormData()
+
+            var fileExt = file.name.split('.').pop().toLowerCase();
+            const fileExt = "pdf";
             // const fileExt = "pdf"; // Set the file extension as PDF
-            var fileExt = file.name.split('.').pop()
-            const orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase();
-            const driveName = localStorage.getItem("drive_selected_name").replace(/ /g, "_").toLowerCase();
-            const fieldName = e.target.name.replace(/ /g, "_").toLowerCase();
-            const filename = `${props.values.selectedPatientId}_${props.values.selectedVisit}_${fieldName}.${fileExt}`;
-            const path = `form_data/${orgName}/${driveName}/${selectCategory}/${filename}`;
+            
+            const orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase()
+            const driveName = localStorage.getItem("drive_selected_name").replace(/ /g, "_").toLowerCase()
+            const fieldName = e.target.name.replace(/ /g, "_").toLowerCase()
+            const filename = `${props.values.selectedPatientId}_${props.values.selectedVisit}_${fieldName}.${fileExt}`
+            const path = `form_data/${orgName}/${driveName}/${selectCategory}/${filename}`
 
-            formDataflask.append("filedoc", file);
-            formDataflask.append("name", "oral_cavity");
-            formDataflask.append("path", path);
+            formDataflask.append("doc", file);
+            formDataflask.append("name", "oral_cavity")
+            formDataflask.append("path", path)
 
-            setLoading(true);
+            setLoading(true)
             try{
                 Axios({
                     url: process.env.REACT_APP_FLASK_URL + "/uploadonlyfile",
                     method: "POST",
                     data: formDataflask,
                 })
-                setLoading(false);
+                setLoading(false)
 
                 setData({
                     ...data,
                     [varfeildname]: path
                 });
-                miniogetURL(path);
+                miniogetURL(path)
             } catch (error) {
-                setLoading(false);
-                console.log(error);
+                setLoading(false)
+                console.log(error)
             }
         }
-    };
+    }
 
     const isString = (value) => {
         return typeof value === 'string' || value instanceof String;
