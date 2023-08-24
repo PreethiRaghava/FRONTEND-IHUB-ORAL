@@ -505,7 +505,7 @@ const PatientForm = function (props) {
             const file = e.target.files[0]
             let formDataflask = new FormData()
 
-            var fileExt = file.name.split('.').pop().toLowerCase();
+            // var fileExt = file.name.split('.').pop().toLowerCase();
             const fileExt = "pdf";
             // const fileExt = "pdf"; // Set the file extension as PDF
             
