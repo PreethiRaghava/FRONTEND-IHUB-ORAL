@@ -782,6 +782,39 @@ const PatientForm = function (props) {
                                         <label style={{ marginBottom: "0px", color: "#05056B" }} className="predLabel">{field.name.replace("_", " ") + " : " + data[field.name]}</label>
                                 )
                             }
+
+                            else if (field.field === "doc") {
+                                return (
+                                    <div className={classes.file} key={field.name}>
+                                        <label style={{ marginBottom: "0px", color: "#05056B" }} className="fileLabel">{field.name.replace(/_/g, ' ').toUpperCase()}</label>
+                                        <input
+                                            type="file"
+                                            accept="application/pdf"
+                                            // capture="environment"
+                                            {...register(field.name, field.rules)}
+                                            onChange={e => {
+                                                register(field.name, field.rules).onChange(e);
+                                                uploadOnlyDOC(e, field.name, data[field.name]);
+                                            }}
+
+                                            disabled={disabled}
+                                            name={field.name}
+                                            style={{ width: "200px", color: "#05056B" }}
+                                        />
+                                        {/* {
+                                            !data[field.name] ? null :
+                                                <img src={tempdata[data[field.name]]} style={{ height: "100px", width: "100px", border: "solid 2px", marginTop: "10px" }} alt="preview" onClick={() => previewImage(tempdata[data[field.name]])} />
+                                        } */}
+                                        {
+                                            !errors[field.name] ? null :
+                                                <>
+                                                    <label className="validationError">{errors[field.name] ? errors[field.name].message : null}</label>
+                                                </>
+                                        }
+                                    </div>
+                                )
+                            }
+
                             else if (field.field === "file") {
                                 // if (data[field.name] !== "") {
                                 //     if (!tempdata[data[field.name]]) {
