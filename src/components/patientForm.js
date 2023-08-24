@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import Axios from 'axios';
 import './patientForm.css';
 import BackArrow from './icons/backArrow.png';
@@ -124,6 +124,7 @@ const PatientForm = function (props) {
     const userInfo = props.values.userInfo;
     const [stationShow, setStationShow] = React.useState(false);
     const isDataUpdating = React.useRef(false);
+    const mandatoryFieldRefs = useRef({});
 
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -498,6 +499,44 @@ const PatientForm = function (props) {
         }
     }
 
+    //upload PDF only
+    const uploadOnlyDOC = async (e, varfeildname, vardataname) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            let formDataflask = new FormData();
+            // const fileExt = "pdf"; // Set the file extension as PDF
+            var fileExt = file.name.split('.').pop()
+            const orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase();
+            const driveName = localStorage.getItem("drive_selected_name").replace(/ /g, "_").toLowerCase();
+            const fieldName = e.target.name.replace(/ /g, "_").toLowerCase();
+            const filename = `${props.values.selectedPatientId}_${props.values.selectedVisit}_${fieldName}.${fileExt}`;
+            const path = `form_data/${orgName}/${driveName}/${selectCategory}/${filename}`;
+
+            formDataflask.append("filedoc", file);
+            formDataflask.append("name", "oral_cavity");
+            formDataflask.append("path", path);
+
+            setLoading(true);
+            try{
+                Axios({
+                    url: process.env.REACT_APP_FLASK_URL + "/uploadonlyfile",
+                    method: "POST",
+                    data: formDataflask,
+                })
+                setLoading(false);
+
+                setData({
+                    ...data,
+                    [varfeildname]: path
+                });
+                miniogetURL(path);
+            } catch (error) {
+                setLoading(false);
+                console.log(error);
+            }
+        }
+    };
+
     const isString = (value) => {
         return typeof value === 'string' || value instanceof String;
     }
@@ -581,6 +620,7 @@ const PatientForm = function (props) {
                 <div id="form-field" className="formFields" >
                     {
                         FormFields[selectCategory].parameters.map(field => {
+                            const isRequired = field.rules && field.rules.required;
                             if (field.field === "text") {
                                 return (
                                     <Controller
@@ -592,13 +632,18 @@ const PatientForm = function (props) {
                                         render={({ field: { onChange, value }, fieldState: { error } }) => (
                                             <TextField
                                                 type={field.type}
-                                                label={field.name.replace(/_/g, ' ').toUpperCase()}
+                                                label={
+                                                    <span>
+                                                      {field.name.replace(/_/g, ' ').toUpperCase()}
+                                                      {isRequired && <span style={{ color: 'red' }}> *</span>}
+                                                    </span>
+                                                }
                                                 variant="outlined"
                                                 error={!!error}
-                                                helperText={error ? error.message : null}
+                                                helperText={isRequired ? "Required" : (error ? error.message : null)}
                                                 disabled={disabled}
                                                 className={classes.textfields}
-                                                placeholder="Type here"
+                                                placeholder={isRequired ? `${field.name.replace(/_/g, ' ').toUpperCase()} is required` : "Type here"}
                                                 InputLabelProps={{
                                                     shrink: true,
                                                     className: classes.textfieldLabel
