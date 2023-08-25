@@ -543,7 +543,7 @@ const PatientForm = function (props) {
             // })
             try{
                 Axios({
-                    url: process.env.REACT_APP_FLASK_URL + "/uploadonlyfile",
+                    url: process.env.REACT_APP_FLASK_URL + "/vamshi",
                     method: "POST",
                     data: formDataflask,
                 })
