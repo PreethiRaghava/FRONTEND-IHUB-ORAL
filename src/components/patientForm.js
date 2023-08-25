@@ -515,7 +515,7 @@ const PatientForm = function (props) {
             const filename = `${props.values.selectedPatientId}_${props.values.selectedVisit}_${fieldName}.${fileExt}`
             const path = `form_data/${orgName}/${driveName}/${selectCategory}/${filename}`
 
-            formDataflask.append("doc", file);
+            formDataflask.append("filedoc", file);
             formDataflask.append("name", "oral_cavity")
             formDataflask.append("path", path)
 
