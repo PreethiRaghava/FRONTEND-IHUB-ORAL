@@ -520,27 +520,7 @@ const PatientForm = function (props) {
             formDataflask.append("path", path)
 
             setLoading(true)
-            // minioClient.presignedPutObject(minioBucket, path, 5 * 60, (err, url) => {
-            //     if (err) {
-            //         setLoading(false);
-            //         console.log(err);
-            //         return;
-            //     }
-                
-            //     Axios.put(url, file)
-            //         .then(() => {
-            //             setLoading(false);
-            //             setData({
-            //                 ...data,
-            //                 [varfeildname]: path
-            //             });
-            //             miniogetURL(path);
-            //         })
-            //         .catch(err => {
-            //             setLoading(false);
-            //             console.log(err);
-            //         });
-            // })
+
             try{
                 Axios({
                     url: process.env.REACT_APP_FLASK_URL + "/vamshi",
