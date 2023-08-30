@@ -36,7 +36,8 @@ class PatientsAll extends Component {
             data: {
                 driveID: localStorage.getItem("drive_selected")
             },
-            withCredentials: true
+            // withCredentials: true,
+            // headers: {'Access-Control-Allow-Origin': '*'}
         })
             .then(res => {
                 // console.log(res.data.data);

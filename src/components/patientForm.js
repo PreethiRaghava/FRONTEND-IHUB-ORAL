@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import Axios from 'axios';
 import './patientForm.css';
 import BackArrow from './icons/backArrow.png';
@@ -124,6 +124,7 @@ const PatientForm = function (props) {
     const userInfo = props.values.userInfo;
     const [stationShow, setStationShow] = React.useState(false);
     const isDataUpdating = React.useRef(false);
+    const mandatoryFieldRefs = useRef({});
 
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -498,6 +499,48 @@ const PatientForm = function (props) {
         }
     }
 
+    //upload PDF only
+    const uploadOnlyDOC = async (e, varfeildname, vardataname) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0]
+            let formDataflask = new FormData()
+
+            // var fileExt = file.name.split('.').pop().toLowerCase();
+            const fileExt = "pdf";
+            // const fileExt = "pdf"; // Set the file extension as PDF
+            
+            const orgName = localStorage.getItem("assist_org_name").replace(/ /g, "_").toLowerCase()
+            const driveName = localStorage.getItem("drive_selected_name").replace(/ /g, "_").toLowerCase()
+            const fieldName = e.target.name.replace(/ /g, "_").toLowerCase()
+            const filename = `${props.values.selectedPatientId}_${props.values.selectedVisit}_${fieldName}.${fileExt}`
+            const path = `form_data/${orgName}/${driveName}/${selectCategory}/${filename}`
+
+            formDataflask.append("filedoc", file);
+            formDataflask.append("name", "oral_cavity")
+            formDataflask.append("path", path)
+
+            setLoading(true)
+
+            try{
+                Axios({
+                    url: process.env.REACT_APP_FLASK_URL + "/vamshi",
+                    method: "POST",
+                    data: formDataflask,
+                })
+                setLoading(false)
+
+                setData({
+                    ...data,
+                    [varfeildname]: path
+                });
+                miniogetURL(path)
+            } catch (error) {
+                setLoading(false)
+                console.log(error)
+            }
+        }
+    }
+
     const isString = (value) => {
         return typeof value === 'string' || value instanceof String;
     }
@@ -581,6 +624,7 @@ const PatientForm = function (props) {
                 <div id="form-field" className="formFields" >
                     {
                         FormFields[selectCategory].parameters.map(field => {
+                            const isRequired = field.rules && field.rules.required;
                             if (field.field === "text") {
                                 return (
                                     <Controller
@@ -592,13 +636,18 @@ const PatientForm = function (props) {
                                         render={({ field: { onChange, value }, fieldState: { error } }) => (
                                             <TextField
                                                 type={field.type}
-                                                label={field.name.replace(/_/g, ' ').toUpperCase()}
+                                                label={
+                                                    <span>
+                                                      {field.name.replace(/_/g, ' ').toUpperCase()}
+                                                      {isRequired && <span style={{ color: 'red' }}> *</span>}
+                                                    </span>
+                                                }
                                                 variant="outlined"
                                                 error={!!error}
-                                                helperText={error ? error.message : null}
+                                                helperText={isRequired ? "Required" : (error ? error.message : null)}
                                                 disabled={disabled}
                                                 className={classes.textfields}
-                                                placeholder="Type here"
+                                                placeholder={isRequired ? `${field.name.replace(/_/g, ' ').toUpperCase()} is required` : "Type here"}
                                                 InputLabelProps={{
                                                     shrink: true,
                                                     className: classes.textfieldLabel
@@ -737,6 +786,39 @@ const PatientForm = function (props) {
                                         <label style={{ marginBottom: "0px", color: "#05056B" }} className="predLabel">{field.name.replace("_", " ") + " : " + data[field.name]}</label>
                                 )
                             }
+
+                            else if (field.field === "doc") {
+                                return (
+                                    <div className={classes.file} key={field.name}>
+                                        <label style={{ marginBottom: "0px", color: "#05056B" }} className="fileLabel">{field.name.replace(/_/g, ' ').toUpperCase()}</label>
+                                        <input
+                                            type="file"
+                                            accept="application/pdf"
+                                            // capture="environment"
+                                            {...register(field.name, field.rules)}
+                                            onChange={e => {
+                                                register(field.name, field.rules).onChange(e);
+                                                uploadOnlyDOC(e, field.name, data[field.name]);
+                                            }}
+
+                                            disabled={disabled}
+                                            name={field.name}
+                                            style={{ width: "200px", color: "#05056B" }}
+                                        />
+                                        {/* {
+                                            !data[field.name] ? null :
+                                                <img src={tempdata[data[field.name]]} style={{ height: "100px", width: "100px", border: "solid 2px", marginTop: "10px" }} alt="preview" onClick={() => previewImage(tempdata[data[field.name]])} />
+                                        } */}
+                                        {
+                                            !errors[field.name] ? null :
+                                                <>
+                                                    <label className="validationError">{errors[field.name] ? errors[field.name].message : null}</label>
+                                                </>
+                                        }
+                                    </div>
+                                )
+                            }
+
                             else if (field.field === "file") {
                                 // if (data[field.name] !== "") {
                                 //     if (!tempdata[data[field.name]]) {
